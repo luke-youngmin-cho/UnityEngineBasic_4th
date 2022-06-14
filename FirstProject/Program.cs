@@ -48,6 +48,7 @@ namespace FirstProject // Note: actual namespace depends on the project name.
         // 실행파일 (.exe) 을 실행했을떄 가장 먼저 실행되는 함수
         static void Main(string[] args)
         {
+            System.Console.WriteLine("Hello World!");
             Console.WriteLine("Hello World!");
         }
     }
