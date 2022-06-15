@@ -1,11 +1,15 @@
 ﻿using System;
 
+//int count; // 전역(글로벌) 변수
+
 namespace Variables
 {
     class Program
     {
         static void Main(string[] args)
         {
+            // 0000(28개)... 1110
+            Human.age = 13; // = 2^3 + 2^2 + 2^1
             Console.WriteLine(".");
             Console.WriteLine(Human.age);
         }
