@@ -47,6 +47,7 @@ namespace Methods
         static void PrintSumResult(int a, int b)
         {
             Console.WriteLine(a + b);
+            return;
         }
 
         static int Sum(int a, int b)
@@ -54,4 +55,6 @@ namespace Methods
             return a + b;
         }
     }
+
+    
 }
