@@ -114,7 +114,31 @@ namespace Operators
 
             // 조건부 and
             Console.WriteLine(A && B);
+
+            // 비트연산자
+            // or, and, xor, not, shift-left, shift-right
+            //====================================================
+            int howManyBitYouWantToShift = 1;
+
+            Console.WriteLine(a | b);
+            Console.WriteLine(a & b);
+            Console.WriteLine(a ^ b);
+            Console.WriteLine(~a);
+            Console.WriteLine(a << howManyBitYouWantToShift);
+            Console.WriteLine(a >> howManyBitYouWantToShift);
+        }
+
+        [Flags]
+        public enum PlayerState
+        {
+            가만히있는상태 = 0,
+            피격중인상태 = 1 << 0,
+            공격중인상태 = 1 << 1,
+            공중에떠있는상태 = 1 << 2,
+            STATE_4 = 1 << 3,
+            STATE_5 = 1 << 4,
         }
     }
 }
+
 

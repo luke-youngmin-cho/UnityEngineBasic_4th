@@ -10,7 +10,17 @@
       "ProjectGuid": "a02ec332-8262-4188-ab8b-f7ade5754f88",
       "DisplayName": "ClassObjectInstance",
       "ColorIndex": 1
+    },
+    "6c003236-9b6d-4239-8668-a332264077a4": {
+      "ProjectGuid": "6c003236-9b6d-4239-8668-a332264077a4",
+      "DisplayName": "Operators",
+      "ColorIndex": 2
+    },
+    "0c335613-7927-4030-bb5a-19a14e8a642d": {
+      "ProjectGuid": "0c335613-7927-4030-bb5a-19a14e8a642d",
+      "DisplayName": "OperatorMethods",
+      "ColorIndex": 3
     }
   },
-  "NextColorIndex": 2
+  "NextColorIndex": 4
 }

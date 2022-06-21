@@ -24,6 +24,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Statement_If", "Statement_I
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Variables", "Variables\Variables.csproj", "{BFF07883-70D0-4AD7-A1F6-C3AA45990BF3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OperatorMethods", "OperatorMethods\OperatorMethods.csproj", "{0C335613-7927-4030-BB5A-19A14E8A642D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -62,6 +64,10 @@ Global
 		{BFF07883-70D0-4AD7-A1F6-C3AA45990BF3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BFF07883-70D0-4AD7-A1F6-C3AA45990BF3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BFF07883-70D0-4AD7-A1F6-C3AA45990BF3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0C335613-7927-4030-BB5A-19A14E8A642D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0C335613-7927-4030-BB5A-19A14E8A642D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0C335613-7927-4030-BB5A-19A14E8A642D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0C335613-7927-4030-BB5A-19A14E8A642D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
