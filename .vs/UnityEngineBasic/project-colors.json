@@ -1,0 +1,16 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "db6f62f6-7a22-4247-9660-d44f8b6d1ad1": {
+      "ProjectGuid": "db6f62f6-7a22-4247-9660-d44f8b6d1ad1",
+      "DisplayName": "Solution Items",
+      "ColorIndex": 0
+    },
+    "a02ec332-8262-4188-ab8b-f7ade5754f88": {
+      "ProjectGuid": "a02ec332-8262-4188-ab8b-f7ade5754f88",
+      "DisplayName": "ClassObjectInstance",
+      "ColorIndex": 1
+    }
+  },
+  "NextColorIndex": 2
+}

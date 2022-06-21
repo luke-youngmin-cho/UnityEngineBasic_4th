@@ -1,0 +1,51 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "c08d3c45-06f9-425a-894e-2e356b08108c": {
+      "ProjectGuid": "c08d3c45-06f9-425a-894e-2e356b08108c",
+      "DisplayName": "FirstProject",
+      "ColorIndex": 0
+    },
+    "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3": {
+      "ProjectGuid": "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3",
+      "DisplayName": "기타 파일",
+      "ColorIndex": -1
+    },
+    "d99ae286-6445-49f0-ad7f-43f32e00bc72": {
+      "ProjectGuid": "d99ae286-6445-49f0-ad7f-43f32e00bc72",
+      "DisplayName": "Variables",
+      "ColorIndex": 1
+    },
+    "e5c37775-1724-448f-83c7-16360433196b": {
+      "ProjectGuid": "e5c37775-1724-448f-83c7-16360433196b",
+      "DisplayName": "Methods",
+      "ColorIndex": 2
+    },
+    "66aef143-4b05-415f-b06e-2d84e30a3658": {
+      "ProjectGuid": "66aef143-4b05-415f-b06e-2d84e30a3658",
+      "DisplayName": "ClassObjectInstance",
+      "ColorIndex": 3
+    },
+    "56656476-5a04-46df-a9bd-9f53ddbb9934": {
+      "ProjectGuid": "56656476-5a04-46df-a9bd-9f53ddbb9934",
+      "DisplayName": "InstantiationExample",
+      "ColorIndex": 4
+    },
+    "8ef407d9-3448-4070-a3d4-d2b3e259c5f3": {
+      "ProjectGuid": "8ef407d9-3448-4070-a3d4-d2b3e259c5f3",
+      "DisplayName": "Statement_If",
+      "ColorIndex": 5
+    },
+    "35e480b1-5bf2-482d-abe3-9a709861f989": {
+      "ProjectGuid": "35e480b1-5bf2-482d-abe3-9a709861f989",
+      "DisplayName": "Example01_ClassObjectInstance",
+      "ColorIndex": 6
+    },
+    "4fbfc6dc-7647-4524-a285-5fd3f3247311": {
+      "ProjectGuid": "4fbfc6dc-7647-4524-a285-5fd3f3247311",
+      "DisplayName": "Operators",
+      "ColorIndex": 7
+    }
+  },
+  "NextColorIndex": 8
+}
