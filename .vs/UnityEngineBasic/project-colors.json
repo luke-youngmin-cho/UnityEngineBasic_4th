@@ -20,7 +20,22 @@
       "ProjectGuid": "0c335613-7927-4030-bb5a-19a14e8a642d",
       "DisplayName": "OperatorMethods",
       "ColorIndex": 3
+    },
+    "b58bedde-b009-4212-8f5a-b40e0ef5c4c5": {
+      "ProjectGuid": "b58bedde-b009-4212-8f5a-b40e0ef5c4c5",
+      "DisplayName": "FirstProject",
+      "ColorIndex": 4
+    },
+    "017dd0dc-32de-47ef-8cd0-4e1913bd7608": {
+      "ProjectGuid": "017dd0dc-32de-47ef-8cd0-4e1913bd7608",
+      "DisplayName": "Array",
+      "ColorIndex": 5
+    },
+    "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3": {
+      "ProjectGuid": "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3",
+      "DisplayName": "기타 파일",
+      "ColorIndex": -1
     }
   },
-  "NextColorIndex": 4
+  "NextColorIndex": 6
 }
