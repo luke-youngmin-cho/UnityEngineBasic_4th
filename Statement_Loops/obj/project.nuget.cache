@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "VQeR5iv34N6MauqEQbe7RLf+fTlNCvBnzF4gXie7LrZ6n9HpnoeKa93B8MVvBPn9YnPEIFAb7zP+pvWEP1TGRg==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\User\\Documents\\GitHub\\UnityEngineBasic_Nowon_2000_2200\\Statement_Loops\\Statement_Loops.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\User\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\5.0.13\\microsoft.netcore.app.host.win-x64.5.0.13.nupkg.sha512"
+  ],
+  "logs": []
+}
