@@ -13,7 +13,7 @@ namespace Array
             int[] arrInt = new int[3];
             int[] arrInt2 = { 1, 2, 3 };
             Console.WriteLine("Hello World!");
-            arrInt = new int[3];
+            arrInt = new int[5];
             float[] arrFloat = new float[4];
 
             // 배열의 인덱스 접근

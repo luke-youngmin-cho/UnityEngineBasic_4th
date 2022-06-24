@@ -45,7 +45,12 @@
       "ProjectGuid": "262d50ea-e232-4672-833c-a8882945900c",
       "DisplayName": "Example02_Array2D",
       "ColorIndex": 7
+    },
+    "56d29f87-e5a6-4bb9-82ea-6fd223c00192": {
+      "ProjectGuid": "56d29f87-e5a6-4bb9-82ea-6fd223c00192",
+      "DisplayName": "Example03_DynamicArray",
+      "ColorIndex": 8
     }
   },
-  "NextColorIndex": 8
+  "NextColorIndex": 9
 }

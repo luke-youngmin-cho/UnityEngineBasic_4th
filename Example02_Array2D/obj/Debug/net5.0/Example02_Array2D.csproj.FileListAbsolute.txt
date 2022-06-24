@@ -13,3 +13,4 @@ C:\Users\User\Documents\GitHub\UnityEngineBasic_Nowon_2000_2200\Example02_Array2
 C:\Users\User\Documents\GitHub\UnityEngineBasic_Nowon_2000_2200\Example02_Array2D\obj\Debug\net5.0\ref\Example02_Array2D.dll
 C:\Users\User\Documents\GitHub\UnityEngineBasic_Nowon_2000_2200\Example02_Array2D\obj\Debug\net5.0\Example02_Array2D.pdb
 C:\Users\User\Documents\GitHub\UnityEngineBasic_Nowon_2000_2200\Example02_Array2D\obj\Debug\net5.0\Example02_Array2D.genruntimeconfig.cache
+C:\Users\User\Documents\GitHub\UnityEngineBasic_Nowon_2000_2200\Example02_Array2D\obj\Debug\net5.0\Example02_Array2D.csproj.AssemblyReference.cache
