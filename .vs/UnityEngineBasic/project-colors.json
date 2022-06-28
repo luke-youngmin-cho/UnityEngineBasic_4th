@@ -50,7 +50,12 @@
       "ProjectGuid": "56d29f87-e5a6-4bb9-82ea-6fd223c00192",
       "DisplayName": "Example03_DynamicArray",
       "ColorIndex": 8
+    },
+    "2be089a4-09bf-46c4-a360-3cd9d04b2df4": {
+      "ProjectGuid": "2be089a4-09bf-46c4-a360-3cd9d04b2df4",
+      "DisplayName": "GenericCollections",
+      "ColorIndex": 9
     }
   },
-  "NextColorIndex": 9
+  "NextColorIndex": 10
 }
