@@ -55,7 +55,12 @@
       "ProjectGuid": "2be089a4-09bf-46c4-a360-3cd9d04b2df4",
       "DisplayName": "GenericCollections",
       "ColorIndex": 9
+    },
+    "90a54e87-19fa-4d1d-9462-dd411ea6cf63": {
+      "ProjectGuid": "90a54e87-19fa-4d1d-9462-dd411ea6cf63",
+      "DisplayName": "Enum_SwitchCase",
+      "ColorIndex": 10
     }
   },
-  "NextColorIndex": 10
+  "NextColorIndex": 11
 }

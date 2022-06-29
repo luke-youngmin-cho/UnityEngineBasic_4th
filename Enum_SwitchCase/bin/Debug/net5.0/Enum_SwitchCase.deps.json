@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v5.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v5.0": {
+      "Enum_SwitchCase/1.0.0": {
+        "runtime": {
+          "Enum_SwitchCase.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Enum_SwitchCase/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

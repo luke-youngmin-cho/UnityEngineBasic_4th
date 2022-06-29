@@ -1,0 +1,15 @@
+C:\Users\User\Documents\GitHub\UnityEngineBasic_Nowon_2000_2200\Enum_SwitchCase\bin\Debug\net5.0\Enum_SwitchCase.exe
+C:\Users\User\Documents\GitHub\UnityEngineBasic_Nowon_2000_2200\Enum_SwitchCase\bin\Debug\net5.0\Enum_SwitchCase.deps.json
+C:\Users\User\Documents\GitHub\UnityEngineBasic_Nowon_2000_2200\Enum_SwitchCase\bin\Debug\net5.0\Enum_SwitchCase.runtimeconfig.json
+C:\Users\User\Documents\GitHub\UnityEngineBasic_Nowon_2000_2200\Enum_SwitchCase\bin\Debug\net5.0\Enum_SwitchCase.runtimeconfig.dev.json
+C:\Users\User\Documents\GitHub\UnityEngineBasic_Nowon_2000_2200\Enum_SwitchCase\bin\Debug\net5.0\Enum_SwitchCase.dll
+C:\Users\User\Documents\GitHub\UnityEngineBasic_Nowon_2000_2200\Enum_SwitchCase\bin\Debug\net5.0\ref\Enum_SwitchCase.dll
+C:\Users\User\Documents\GitHub\UnityEngineBasic_Nowon_2000_2200\Enum_SwitchCase\bin\Debug\net5.0\Enum_SwitchCase.pdb
+C:\Users\User\Documents\GitHub\UnityEngineBasic_Nowon_2000_2200\Enum_SwitchCase\obj\Debug\net5.0\Enum_SwitchCase.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\User\Documents\GitHub\UnityEngineBasic_Nowon_2000_2200\Enum_SwitchCase\obj\Debug\net5.0\Enum_SwitchCase.AssemblyInfoInputs.cache
+C:\Users\User\Documents\GitHub\UnityEngineBasic_Nowon_2000_2200\Enum_SwitchCase\obj\Debug\net5.0\Enum_SwitchCase.AssemblyInfo.cs
+C:\Users\User\Documents\GitHub\UnityEngineBasic_Nowon_2000_2200\Enum_SwitchCase\obj\Debug\net5.0\Enum_SwitchCase.csproj.CoreCompileInputs.cache
+C:\Users\User\Documents\GitHub\UnityEngineBasic_Nowon_2000_2200\Enum_SwitchCase\obj\Debug\net5.0\Enum_SwitchCase.dll
+C:\Users\User\Documents\GitHub\UnityEngineBasic_Nowon_2000_2200\Enum_SwitchCase\obj\Debug\net5.0\ref\Enum_SwitchCase.dll
+C:\Users\User\Documents\GitHub\UnityEngineBasic_Nowon_2000_2200\Enum_SwitchCase\obj\Debug\net5.0\Enum_SwitchCase.pdb
+C:\Users\User\Documents\GitHub\UnityEngineBasic_Nowon_2000_2200\Enum_SwitchCase\obj\Debug\net5.0\Enum_SwitchCase.genruntimeconfig.cache

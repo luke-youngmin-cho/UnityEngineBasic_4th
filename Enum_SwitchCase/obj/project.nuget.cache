@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "MtSvIyCi+eVLSmVaxDvjp55YmiGyR4Mppz9qIcO2zxGBF+AHvas9UtVZjB00rDTKwEOH99LIGVjDCkjaKtHNpA==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\User\\Documents\\GitHub\\UnityEngineBasic_Nowon_2000_2200\\Enum_SwitchCase\\Enum_SwitchCase.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\User\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\5.0.13\\microsoft.netcore.app.host.win-x64.5.0.13.nupkg.sha512"
+  ],
+  "logs": []
+}
