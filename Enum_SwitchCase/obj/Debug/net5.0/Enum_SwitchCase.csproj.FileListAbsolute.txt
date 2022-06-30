@@ -13,3 +13,4 @@ C:\Users\User\Documents\GitHub\UnityEngineBasic_Nowon_2000_2200\Enum_SwitchCase\
 C:\Users\User\Documents\GitHub\UnityEngineBasic_Nowon_2000_2200\Enum_SwitchCase\obj\Debug\net5.0\ref\Enum_SwitchCase.dll
 C:\Users\User\Documents\GitHub\UnityEngineBasic_Nowon_2000_2200\Enum_SwitchCase\obj\Debug\net5.0\Enum_SwitchCase.pdb
 C:\Users\User\Documents\GitHub\UnityEngineBasic_Nowon_2000_2200\Enum_SwitchCase\obj\Debug\net5.0\Enum_SwitchCase.genruntimeconfig.cache
+C:\Users\User\Documents\GitHub\UnityEngineBasic_Nowon_2000_2200\Enum_SwitchCase\obj\Debug\net5.0\Enum_SwitchCase.csproj.AssemblyReference.cache

@@ -60,7 +60,12 @@
       "ProjectGuid": "90a54e87-19fa-4d1d-9462-dd411ea6cf63",
       "DisplayName": "Enum_SwitchCase",
       "ColorIndex": 10
+    },
+    "f818cb70-66cb-4284-9f13-86e7a956b3a0": {
+      "ProjectGuid": "f818cb70-66cb-4284-9f13-86e7a956b3a0",
+      "DisplayName": "Example4_HorseRacing",
+      "ColorIndex": 11
     }
   },
-  "NextColorIndex": 11
+  "NextColorIndex": 12
 }

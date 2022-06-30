@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "NQ68lobzn/dKFU7uuu6iMDJrY9nPxeyjD2E2bJMOmclRQo9FshEBUJlmt/zvX+l796a2M51WTI/2TW8bXGfPyA==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\User\\Documents\\GitHub\\UnityEngineBasic_Nowon_2000_2200\\Example4_HorseRacing\\Example4_HorseRacing.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\User\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\5.0.13\\microsoft.netcore.app.host.win-x64.5.0.13.nupkg.sha512"
+  ],
+  "logs": []
+}
