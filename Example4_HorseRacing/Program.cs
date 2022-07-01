@@ -36,9 +36,9 @@ namespace Example4_HorseRacing
         static void Main(string[] args)
         {
             List<Horse> horses = new List<Horse>();
-
+            List<Horse> finishedHorses = new List<Horse>();
             for (int i = 0; i < 5; i++)
-                horses.Add(new Horse($"{i} 번마"));
+                horses.Add(new Horse($"{i + 1} 번마"));
 
 
             int count = 0;
@@ -59,12 +59,13 @@ namespace Example4_HorseRacing
                         {
                             horse.grade = grade;
                             horse.enabled = false;
+                            finishedHorses.Add(horse);
                             grade++;
                         }
                     }
                 }
 
-                if (grade > horses.Count + 1)
+                if (grade > horses.Count)
                 {
                     isGameFinished = true;
                     Console.WriteLine("경주 끝");
@@ -76,9 +77,8 @@ namespace Example4_HorseRacing
                 count++;
             }
 
-            Console.WriteLine("========================= 결과 발표 =======================");
-            var sorted = horses.OrderBy(x => x.grade);
-            foreach (var sub in sorted)
+            Console.WriteLine("========================= 결과 발표 =======================");           
+            foreach (var sub in finishedHorses)
             {
                 Console.WriteLine($"{sub.grade} 등 : {sub.name}");
             }

@@ -65,7 +65,17 @@
       "ProjectGuid": "f818cb70-66cb-4284-9f13-86e7a956b3a0",
       "DisplayName": "Example4_HorseRacing",
       "ColorIndex": 11
+    },
+    "5b980fbf-3ebb-4ab3-9aa5-3d8732406e6f": {
+      "ProjectGuid": "5b980fbf-3ebb-4ab3-9aa5-3d8732406e6f",
+      "DisplayName": "Structure",
+      "ColorIndex": 12
+    },
+    "678d7e7f-1429-4b7b-bcd5-c260d28b075d": {
+      "ProjectGuid": "678d7e7f-1429-4b7b-bcd5-c260d28b075d",
+      "DisplayName": "GCTest",
+      "ColorIndex": 13
     }
   },
-  "NextColorIndex": 12
+  "NextColorIndex": 14
 }
