@@ -75,7 +75,12 @@
       "ProjectGuid": "678d7e7f-1429-4b7b-bcd5-c260d28b075d",
       "DisplayName": "GCTest",
       "ColorIndex": 13
+    },
+    "6139a60a-f97a-4a9f-a083-8aa123ed8441": {
+      "ProjectGuid": "6139a60a-f97a-4a9f-a083-8aa123ed8441",
+      "DisplayName": "ClassInheritance",
+      "ColorIndex": 14
     }
   },
-  "NextColorIndex": 14
+  "NextColorIndex": 15
 }
