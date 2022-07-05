@@ -80,7 +80,17 @@
       "ProjectGuid": "6139a60a-f97a-4a9f-a083-8aa123ed8441",
       "DisplayName": "ClassInheritance",
       "ColorIndex": 14
+    },
+    "7665d9b4-8394-4904-852a-806d7ae75f14": {
+      "ProjectGuid": "7665d9b4-8394-4904-852a-806d7ae75f14",
+      "DisplayName": "Delegate",
+      "ColorIndex": 15
+    },
+    "92686942-70c6-4d23-8883-7eca400b0a39": {
+      "ProjectGuid": "92686942-70c6-4d23-8883-7eca400b0a39",
+      "DisplayName": "Example01_ClassObjectInstance",
+      "ColorIndex": 0
     }
   },
-  "NextColorIndex": 15
+  "NextColorIndex": 1
 }
