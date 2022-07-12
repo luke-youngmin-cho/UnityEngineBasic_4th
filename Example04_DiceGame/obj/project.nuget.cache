@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "KPX4fPVwh8spU+Fvuf+xTJ8quEPpGKGbSI2VaWekh/8WPcCxJb4Q54KK9f745gpJQ4lybV3a9uyfVngI4Vv3Wg==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\User\\Documents\\GitHub\\UnityEngineBasic_Nowon_2000_2200\\Example04_DiceGame\\Example04_DiceGame.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\User\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\5.0.13\\microsoft.netcore.app.host.win-x64.5.0.13.nupkg.sha512"
+  ],
+  "logs": []
+}

@@ -1,0 +1,16 @@
+C:\Users\User\Documents\GitHub\UnityEngineBasic_Nowon_2000_2200\Example04_DiceGame\bin\Debug\net5.0\Example04_DiceGame.exe
+C:\Users\User\Documents\GitHub\UnityEngineBasic_Nowon_2000_2200\Example04_DiceGame\bin\Debug\net5.0\Example04_DiceGame.deps.json
+C:\Users\User\Documents\GitHub\UnityEngineBasic_Nowon_2000_2200\Example04_DiceGame\bin\Debug\net5.0\Example04_DiceGame.runtimeconfig.json
+C:\Users\User\Documents\GitHub\UnityEngineBasic_Nowon_2000_2200\Example04_DiceGame\bin\Debug\net5.0\Example04_DiceGame.runtimeconfig.dev.json
+C:\Users\User\Documents\GitHub\UnityEngineBasic_Nowon_2000_2200\Example04_DiceGame\bin\Debug\net5.0\Example04_DiceGame.dll
+C:\Users\User\Documents\GitHub\UnityEngineBasic_Nowon_2000_2200\Example04_DiceGame\bin\Debug\net5.0\ref\Example04_DiceGame.dll
+C:\Users\User\Documents\GitHub\UnityEngineBasic_Nowon_2000_2200\Example04_DiceGame\bin\Debug\net5.0\Example04_DiceGame.pdb
+C:\Users\User\Documents\GitHub\UnityEngineBasic_Nowon_2000_2200\Example04_DiceGame\obj\Debug\net5.0\Example04_DiceGame.csproj.AssemblyReference.cache
+C:\Users\User\Documents\GitHub\UnityEngineBasic_Nowon_2000_2200\Example04_DiceGame\obj\Debug\net5.0\Example04_DiceGame.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\User\Documents\GitHub\UnityEngineBasic_Nowon_2000_2200\Example04_DiceGame\obj\Debug\net5.0\Example04_DiceGame.AssemblyInfoInputs.cache
+C:\Users\User\Documents\GitHub\UnityEngineBasic_Nowon_2000_2200\Example04_DiceGame\obj\Debug\net5.0\Example04_DiceGame.AssemblyInfo.cs
+C:\Users\User\Documents\GitHub\UnityEngineBasic_Nowon_2000_2200\Example04_DiceGame\obj\Debug\net5.0\Example04_DiceGame.csproj.CoreCompileInputs.cache
+C:\Users\User\Documents\GitHub\UnityEngineBasic_Nowon_2000_2200\Example04_DiceGame\obj\Debug\net5.0\Example04_DiceGame.dll
+C:\Users\User\Documents\GitHub\UnityEngineBasic_Nowon_2000_2200\Example04_DiceGame\obj\Debug\net5.0\ref\Example04_DiceGame.dll
+C:\Users\User\Documents\GitHub\UnityEngineBasic_Nowon_2000_2200\Example04_DiceGame\obj\Debug\net5.0\Example04_DiceGame.pdb
+C:\Users\User\Documents\GitHub\UnityEngineBasic_Nowon_2000_2200\Example04_DiceGame\obj\Debug\net5.0\Example04_DiceGame.genruntimeconfig.cache

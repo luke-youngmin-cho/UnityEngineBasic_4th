@@ -90,7 +90,17 @@
       "ProjectGuid": "92686942-70c6-4d23-8883-7eca400b0a39",
       "DisplayName": "Example01_ClassObjectInstance",
       "ColorIndex": 0
+    },
+    "265e4e70-5621-4d31-b7ad-820be31617af": {
+      "ProjectGuid": "265e4e70-5621-4d31-b7ad-820be31617af",
+      "DisplayName": "InstantiationExample",
+      "ColorIndex": 1
+    },
+    "23d37684-f661-4200-ab7e-9b91c5edce3b": {
+      "ProjectGuid": "23d37684-f661-4200-ab7e-9b91c5edce3b",
+      "DisplayName": "Example04_DiceGame",
+      "ColorIndex": 2
     }
   },
-  "NextColorIndex": 1
+  "NextColorIndex": 3
 }
