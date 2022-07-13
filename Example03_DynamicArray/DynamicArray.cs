@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace Example03_DynamicArray
 {
-    internal class DynamicArray
+    internal class DynamicArray<T>
     {
         // const : 해당 변수를 상수형태로 취급하겠다는 키워드
         private const int DEFAULT_SIZE = 1;        
-        private int[] _data = new int[DEFAULT_SIZE];
+        private T[] _data = new T[DEFAULT_SIZE];
 
-        public int this[int index]
+        public T this[int index]
         {
             get
             {
@@ -39,12 +39,12 @@ namespace Example03_DynamicArray
 
 
 
-        public void Add(int item)
+        public void Add(T item)
         {
             // Capacity 가 모자라면 배열 크기 늘림
             if (Length >= Capacity)
             {
-                int[] tmp = new int[Capacity * 2];
+                T[] tmp = new T[Capacity * 2];
                 for (int i = 0; i < Length; i++)
                 {
                     tmp[i] = _data[i];
@@ -56,12 +56,12 @@ namespace Example03_DynamicArray
             Length++;
         }
 
-        public bool Remove(int item)
+        public bool Remove(T item)
         {
             bool isFounded = false;
             for (int i = 0; i < Length; i++)
             {
-                if (_data[i] == item)
+                if (Comparer<T>.Default.Compare(_data[i], item) == 0)
                 {
                     isFounded = true;
                     RemoveAt(i);
@@ -78,7 +78,7 @@ namespace Example03_DynamicArray
             {
                 _data[i] = _data[i + 1];
             }
-            _data[Length - 1] = default(int);
+            _data[Length - 1] = default(T);
             Length--;
         }
     }
