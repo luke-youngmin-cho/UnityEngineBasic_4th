@@ -105,7 +105,17 @@
       "ProjectGuid": "a0de7389-a168-4dda-a6d1-7423eb4a84fe",
       "DisplayName": "Example06_MyLinkedList",
       "ColorIndex": 3
+    },
+    "d89b6de7-e7a3-4dcc-9ca5-2784b882d6c7": {
+      "ProjectGuid": "d89b6de7-e7a3-4dcc-9ca5-2784b882d6c7",
+      "DisplayName": "Example07_MyHashtable",
+      "ColorIndex": 4
+    },
+    "21195c31-3c97-4127-88f7-bbd76e3e33c3": {
+      "ProjectGuid": "21195c31-3c97-4127-88f7-bbd76e3e33c3",
+      "DisplayName": "Example08_MyBinaryTree",
+      "ColorIndex": 5
     }
   },
-  "NextColorIndex": 4
+  "NextColorIndex": 6
 }

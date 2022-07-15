@@ -39,6 +39,7 @@ namespace Example06_MyLinkedList
 
     public class EnumeratorTest
     {
+        // FSM (Finite State Machine : 유한상태머신) 을 작성할때도 유용함
         public IEnumerable<int> E_GetFactorial(int num)
         {
             int tmpResult = 1;
