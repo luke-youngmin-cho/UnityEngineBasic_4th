@@ -12,7 +12,7 @@ public class PlayerMove : MonoBehaviour
         float h = Input.GetAxis("Horizontal"); // x 축 입력
         float v = Input.GetAxis("Vertical"); // z 축 입력
 
-        Vector3 dir = new Vector3(h, 0, v).normalized;
+        Vector3 dir = new Vector3(h, 0, v).normalized; // 크기가 1인 방향벡터
         Vector3 moveVec = dir * moveSpeed * Time.fixedDeltaTime;
         transform.Translate(moveVec);
 
