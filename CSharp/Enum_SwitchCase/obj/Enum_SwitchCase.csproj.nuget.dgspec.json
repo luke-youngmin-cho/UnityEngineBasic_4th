@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\User\\Documents\\GitHub\\UnityEngineBasic_Nowon_2000_2200\\Enum_SwitchCase\\Enum_SwitchCase.csproj": {}
+    "C:\\Users\\User\\Documents\\GitHub\\UnityEngineBasic_Nowon_2000_2200\\CSharp\\Enum_SwitchCase\\Enum_SwitchCase.csproj": {}
   },
   "projects": {
-    "C:\\Users\\User\\Documents\\GitHub\\UnityEngineBasic_Nowon_2000_2200\\Enum_SwitchCase\\Enum_SwitchCase.csproj": {
+    "C:\\Users\\User\\Documents\\GitHub\\UnityEngineBasic_Nowon_2000_2200\\CSharp\\Enum_SwitchCase\\Enum_SwitchCase.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\User\\Documents\\GitHub\\UnityEngineBasic_Nowon_2000_2200\\Enum_SwitchCase\\Enum_SwitchCase.csproj",
+        "projectUniqueName": "C:\\Users\\User\\Documents\\GitHub\\UnityEngineBasic_Nowon_2000_2200\\CSharp\\Enum_SwitchCase\\Enum_SwitchCase.csproj",
         "projectName": "Enum_SwitchCase",
-        "projectPath": "C:\\Users\\User\\Documents\\GitHub\\UnityEngineBasic_Nowon_2000_2200\\Enum_SwitchCase\\Enum_SwitchCase.csproj",
+        "projectPath": "C:\\Users\\User\\Documents\\GitHub\\UnityEngineBasic_Nowon_2000_2200\\CSharp\\Enum_SwitchCase\\Enum_SwitchCase.csproj",
         "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\User\\Documents\\GitHub\\UnityEngineBasic_Nowon_2000_2200\\Enum_SwitchCase\\obj\\",
+        "outputPath": "C:\\Users\\User\\Documents\\GitHub\\UnityEngineBasic_Nowon_2000_2200\\CSharp\\Enum_SwitchCase\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "azlL12TGyEuGmsOQ+i7eA3tNssQhJpDmm7X+SuA/8AukckH47aRkiodyTBP6DfJeVusvMYLX8SIyUlzq4Vruow==",
+  "dgSpecHash": "uTHwQki9nn9CeeCmPMk6Fcouwh3LuLmRG26rMWRj/AX/aahSrUjLfMVutGIbYj4C5pPdTF+E+99Wo7RoP3Z/iQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\User\\Documents\\GitHub\\UnityEngineBasic_Nowon_2000_2200\\ClassInheritance\\ClassInheritance.csproj",
+  "projectFilePath": "C:\\Users\\User\\Documents\\GitHub\\UnityEngineBasic_Nowon_2000_2200\\CSharp\\ClassInheritance\\ClassInheritance.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\User\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\5.0.13\\microsoft.netcore.app.host.win-x64.5.0.13.nupkg.sha512"
   ],
