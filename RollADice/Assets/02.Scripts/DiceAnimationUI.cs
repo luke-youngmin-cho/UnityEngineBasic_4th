@@ -11,6 +11,16 @@ public class DiceAnimationUI : MonoBehaviour
     [SerializeField] private float _animationTime;
     private float _timer;
     private List<Sprite> sprites = new List<Sprite>();
+    //private Coroutine _coroutine = null;
+    public bool isPlaying { get; private set; }
+    public delegate void AfterAnimation(int diceValue);
+    event AfterAnimation OnAnimationFinish;
+    
+
+    public void RegisterCallBack(AfterAnimation afterAnimation)
+    {
+        OnAnimationFinish += afterAnimation;
+    }
 
     private void Awake()
     {
@@ -49,13 +59,15 @@ public class DiceAnimationUI : MonoBehaviour
     //    }
     //}
 
-    public void DoDiceAnimation()
+    public void DoDiceAnimation(int diceValue)
     {
-        StartCoroutine(E_DiceAnimation());
+        //_coroutine = StartCoroutine(E_DiceAnimation());
+        StartCoroutine(E_DiceAnimation(diceValue));
     }
 
-    IEnumerator E_DiceAnimation()
+    IEnumerator E_DiceAnimation(int diceValue)
     {
+        isPlaying = true;
         float elapsedTime = 0;
         while (elapsedTime < _animationTime)
         {
@@ -74,6 +86,9 @@ public class DiceAnimationUI : MonoBehaviour
         //    _image.sprite = sprites[Random.Range(0, sprites.Count)];
         //    yield return new WaitForSeconds(_animationDelay);
         //}
-        yield return null;
+
+        _image.sprite = sprites[diceValue - 1];
+        OnAnimationFinish(diceValue);
+        isPlaying = false;
     }
 }
