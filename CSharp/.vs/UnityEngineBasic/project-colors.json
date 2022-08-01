@@ -115,7 +115,12 @@
       "ProjectGuid": "21195c31-3c97-4127-88f7-bbd76e3e33c3",
       "DisplayName": "Example08_MyBinaryTree",
       "ColorIndex": 5
+    },
+    "391b3534-66fb-4cf2-9673-03adc360d0ba": {
+      "ProjectGuid": "391b3534-66fb-4cf2-9673-03adc360d0ba",
+      "DisplayName": "SortAlgorithms",
+      "ColorIndex": 6
     }
   },
-  "NextColorIndex": 6
+  "NextColorIndex": 7
 }
