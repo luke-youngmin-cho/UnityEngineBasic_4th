@@ -4,15 +4,13 @@ using UnityEngine;
 
 public class NoteSpawner : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public KeyCode keyCode;
+    [SerializeField] private GameObject _notePrefab;
 
-    // Update is called once per frame
-    void Update()
+    public Note SpawnNote()
     {
-        
+        GameObject note = Instantiate(_notePrefab, transform.position, Quaternion.identity);
+        note.transform.localScale = transform.lossyScale;
+        return note.GetComponent<Note>();
     }
 }
