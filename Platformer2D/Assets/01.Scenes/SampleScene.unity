@@ -157,7 +157,7 @@ PlatformEffector2D:
   m_RotationalOffset: 0
   m_UseOneWay: 1
   m_UseOneWayGrouping: 0
-  m_SurfaceArc: 170
+  m_SurfaceArc: 150
   m_UseSideFriction: 0
   m_UseSideBounce: 0
   m_SideArc: 1
@@ -377,7 +377,7 @@ PlatformEffector2D:
   m_RotationalOffset: 0
   m_UseOneWay: 1
   m_UseOneWayGrouping: 0
-  m_SurfaceArc: 170
+  m_SurfaceArc: 150
   m_UseSideFriction: 0
   m_UseSideBounce: 0
   m_SideArc: 1
@@ -505,10 +505,13 @@ MonoBehaviour:
   _slideState: 0
   _attackState: 0
   _dashState: 0
+  _crouchState: 0
+  _downJumpState: 0
   _moveSpeed: 1
-  _jumpForce: 2
+  _jumpForce: 3
   _slideSpeed: 3
   _dashSpeed: 3
+  _downJumpForce: 1
   _attackHitCastCenter: {x: 0.2, y: 0.2}
   _attackHitCastSize: {x: 0.4, y: 0.4}
   _attackTargetLayer:
@@ -525,7 +528,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 779286227}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.392, y: 0, z: 0}
+  m_LocalPosition: {x: -0.075, y: 0.151, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1142967026}
@@ -600,7 +603,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f24aa14d9be4d314e864a90c6bb42038, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isDetected: 0
   _targetLayer:
     serializedVersion: 2
     m_Bits: 1024
@@ -720,7 +722,7 @@ PlatformEffector2D:
   m_RotationalOffset: 0
   m_UseOneWay: 1
   m_UseOneWayGrouping: 0
-  m_SurfaceArc: 170
+  m_SurfaceArc: 150
   m_UseSideFriction: 0
   m_UseSideBounce: 0
   m_SideArc: 1
@@ -849,7 +851,7 @@ PlatformEffector2D:
   m_RotationalOffset: 0
   m_UseOneWay: 1
   m_UseOneWayGrouping: 0
-  m_SurfaceArc: 170
+  m_SurfaceArc: 150
   m_UseSideFriction: 0
   m_UseSideBounce: 0
   m_SideArc: 1
