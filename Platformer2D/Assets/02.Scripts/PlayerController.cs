@@ -144,8 +144,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Vector2 _colOffsetCrouch = new Vector2(0.0f, 0.075f);
     [SerializeField] private Vector2 _colSizeCrouch = new Vector2(0.15f, 0.15f);
 
-    private bool isMovable = true;
-    private bool isDirectionChangable = true;
+    private bool _isMovable = true;
+    private bool _isDirectionChangable = true;
     private float _slideAnimationTime;
     private float _attackAnimationTime;
     private float _dashAnimationTime;
@@ -172,7 +172,7 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        if (isDirectionChangable)
+        if (_isDirectionChangable)
         {
             if (h < 0.0f)
                 direction = -1;
@@ -180,7 +180,7 @@ public class PlayerController : MonoBehaviour
                 direction = 1;
         }
 
-        if (isMovable)
+        if (_isMovable)
         {
             _move.x = h;
 
@@ -377,8 +377,8 @@ public class PlayerController : MonoBehaviour
             case IdleState.Idle:
                 break;
             case IdleState.Prepare:
-                isMovable = true;
-                isDirectionChangable = true;
+                _isMovable = true;
+                _isDirectionChangable = true;
                 _animator.Play("Idle");
                 _idleState = IdleState.OnAction;
                 break;
@@ -400,8 +400,8 @@ public class PlayerController : MonoBehaviour
             case MoveState.Idle:
                 break;
             case MoveState.Prepare:
-                isMovable = true;
-                isDirectionChangable = true;
+                _isMovable = true;
+                _isDirectionChangable = true;
                 _animator.Play("Move");
                 _moveState = MoveState.OnAction;
                 break;
@@ -424,8 +424,8 @@ public class PlayerController : MonoBehaviour
             case JumpState.Idle:
                 break;
             case JumpState.Prepare:
-                isMovable = false;
-                isDirectionChangable = true;
+                _isMovable = false;
+                _isDirectionChangable = true;
                 _animator.Play("Jump");
                 _rb.velocity = new Vector2(_rb.velocity.x, 0);
                 _rb.AddForce(Vector2.up * _jumpForce, ForceMode2D.Impulse);
@@ -455,8 +455,8 @@ public class PlayerController : MonoBehaviour
             case FallState.Idle:
                 break;
             case FallState.Prepare:
-                isMovable = false;
-                isDirectionChangable = true;
+                _isMovable = false;
+                _isDirectionChangable = true;
                 _animator.Play("Fall");
                 _fallState = FallState.OnAction;
                 break;
@@ -482,8 +482,8 @@ public class PlayerController : MonoBehaviour
             case SlideState.Idle:
                 break;
             case SlideState.Prepare:
-                isMovable = false;
-                isDirectionChangable = false;
+                _isMovable = false;
+                _isDirectionChangable = false;
                 _animator.Play("Slide");
                 _animationTimer = _slideAnimationTime;
                 _slideState++;
@@ -528,8 +528,8 @@ public class PlayerController : MonoBehaviour
             case AttackState.Idle:
                 break;
             case AttackState.Prepare:
-                isMovable = false;
-                isDirectionChangable = false;
+                _isMovable = false;
+                _isDirectionChangable = false;
                 _animator.Play("Attack");
                 _animationTimer = _attackAnimationTime;
                 _attackState = AttackState.OnAction;
@@ -557,8 +557,8 @@ public class PlayerController : MonoBehaviour
             case DashState.Idle:
                 break;
             case DashState.Prepare:
-                isMovable = false;
-                isDirectionChangable = false;
+                _isMovable = false;
+                _isDirectionChangable = false;
                 _animator.Play("Dash");
                 _animationTimer = _dashAnimationTime;
                 _dashState++;
@@ -604,8 +604,8 @@ public class PlayerController : MonoBehaviour
                 break;
             case CrouchState.Prepare:
                 _move.x = 0.0f;
-                isMovable = false;
-                isDirectionChangable = true;
+                _isMovable = false;
+                _isDirectionChangable = true;
                 _animator.Play("Crouch");
                 _crouchState = CrouchState.OnAction;
                 break;
@@ -630,8 +630,8 @@ public class PlayerController : MonoBehaviour
             case DownJumpState.Idle:
                 break;
             case DownJumpState.Prepare:
-                isMovable = false;
-                isDirectionChangable = true;
+                _isMovable = false;
+                _isDirectionChangable = true;
                 _animator.Play("Jump");
                 _rb.velocity = new Vector2(_rb.velocity.x, 0.0f);
                 _groundDetector.IgnoreLastGround();
