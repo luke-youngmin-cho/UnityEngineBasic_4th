@@ -122,6 +122,24 @@ public class EnemyController : MonoBehaviour
     private float _hurtTime;
     private float _dieTime;
 
+    [SerializeField] private Vector2 _knockBackForce;
+    public void TryHurt()
+    {
+        if (_state == State.Hurt)
+            _animationTimer = _hurtTime;
+        else
+            ChangeState(State.Hurt);
+    }
+    public void TryDie()
+    {
+        ChangeState(State.Die);
+    }
+
+    public void KnockBack(int knockBackDirection)
+    {
+        _rb.velocity = Vector2.zero;
+        _rb.AddForce(new Vector2(knockBackDirection * _knockBackForce.x, _knockBackForce.y), ForceMode2D.Impulse);
+    }
 
     private void Awake()
     {
@@ -144,12 +162,16 @@ public class EnemyController : MonoBehaviour
                 direction = 1;
         }
 
-        if (_isMovable)
+        if (_state != State.Hurt && 
+            _state != State.Die)
         {
-            if (Mathf.Abs(_move.x) > 0.0f)
-                ChangeState(State.Move);
-            else
-                ChangeState(State.Idle);
+            if (_isMovable)
+            {
+                if (Mathf.Abs(_move.x) > 0.0f)
+                    ChangeState(State.Move);
+                else
+                    ChangeState(State.Idle);
+            }
         }
 
         UpdateState();
@@ -234,6 +256,10 @@ public class EnemyController : MonoBehaviour
 
     private void UpdateAIState()
     {
+        if (_state == State.Hurt ||
+            _state == State.Die)
+            return;
+
         if (_aiAutoFollow == true)
         {
             if (Physics2D.OverlapCircle(_rb.position, _aiTargetDetectRange, _targetLayer))
@@ -320,6 +346,10 @@ public class EnemyController : MonoBehaviour
             case IdleState.Idle:
                 break;
             case IdleState.Prepare:
+                _isMovable = true;
+                _isDirectionChangable = true;
+                _animator.Play("Idle");
+                _idleState = IdleState.OnAction;
                 break;
             case IdleState.Casting:
                 break;
@@ -339,6 +369,10 @@ public class EnemyController : MonoBehaviour
             case MoveState.Idle:
                 break;
             case MoveState.Prepare:
+                _isMovable = true;
+                _isDirectionChangable = true;
+                _animator.Play("Move");
+                _moveState = MoveState.OnAction;
                 break;
             case MoveState.Casting:
                 break;
@@ -357,6 +391,12 @@ public class EnemyController : MonoBehaviour
             case AttackState.Idle:
                 break;
             case AttackState.Prepare:
+                _isMovable = false;
+                _isDirectionChangable = false;
+                _move.x = 0.0f;
+                _rb.velocity = Vector2.zero;
+                _animator.Play("Attack");
+                _attackState++;
                 break;
             case AttackState.Casting:
                 break;
@@ -375,10 +415,23 @@ public class EnemyController : MonoBehaviour
             case HurtState.Idle:
                 break;
             case HurtState.Prepare:
+                _isMovable = false;
+                _isDirectionChangable = false;
+                _animationTimer = _hurtTime;
+                _animator.Play("Hurt");
+                _hurtState = HurtState.OnAction;
                 break;
             case HurtState.Casting:
                 break;
             case HurtState.OnAction:
+                if (_animationTimer < 0)
+                {
+                    ChangeState(State.Idle);
+                }
+                else
+                {
+                    _animationTimer -= Time.deltaTime;
+                }
                 break;
             case HurtState.Finish:
                 break;
@@ -393,10 +446,25 @@ public class EnemyController : MonoBehaviour
             case DieState.Idle:
                 break;
             case DieState.Prepare:
+                _isMovable = false;
+                _isDirectionChangable = false;
+                _move.x = 0;
+                _rb.velocity = Vector2.zero;
+                _animationTimer = _dieTime;
+                _animator.Play("Die");
+                _dieState = DieState.OnAction;
                 break;
             case DieState.Casting:
                 break;
             case DieState.OnAction:
+                if (_animationTimer < 0)
+                {
+                    Destroy(gameObject);
+                }
+                else
+                {
+                    _animationTimer -= Time.deltaTime;
+                }
                 break;
             case DieState.Finish:
                 break;

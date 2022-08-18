@@ -135,6 +135,8 @@ public class PlayerController : MonoBehaviour
         }
     }
     [SerializeField] private int _directionInit;
+
+    private Player _player;
     private Animator _animator;
     private Rigidbody2D _rb;
     private CapsuleCollider2D _col;
@@ -143,6 +145,8 @@ public class PlayerController : MonoBehaviour
     private Vector2 _colSizeOrigin;
     [SerializeField] private Vector2 _colOffsetCrouch = new Vector2(0.0f, 0.075f);
     [SerializeField] private Vector2 _colSizeCrouch = new Vector2(0.15f, 0.15f);
+    [SerializeField] private Vector2 _knockBackForce;
+
 
     private bool _isMovable = true;
     private bool _isDirectionChangable = true;
@@ -155,10 +159,24 @@ public class PlayerController : MonoBehaviour
     private float h { get => Input.GetAxis("Horizontal"); }
     private float v { get => Input.GetAxis("Vertical"); }
 
+    public void TryHurt()
+    {
+        // todo -> changestate to hurt
+    }
+    public void TryDie()
+    {
+        // todo -> changestate to die
+    }
+    public void KnockBack()
+    {
+        _rb.velocity = Vector2.zero;
+        _rb.AddForce(new Vector2(-_direction * _knockBackForce.x, _knockBackForce.y), ForceMode2D.Impulse);
+    }
 
     private void Awake()
     {
         direction = _directionInit;    
+        _player = GetComponent<Player>();
         _rb = GetComponent<Rigidbody2D>();
         _col = GetComponent<CapsuleCollider2D>();
         _animator = GetComponent<Animator>();
@@ -530,6 +548,8 @@ public class PlayerController : MonoBehaviour
             case AttackState.Prepare:
                 _isMovable = false;
                 _isDirectionChangable = false;
+                _move.x = 0;
+                _rb.velocity = new Vector2(0.0f, _rb.velocity.y);
                 _animator.Play("Attack");
                 _animationTimer = _attackAnimationTime;
                 _attackState = AttackState.OnAction;
@@ -687,7 +707,14 @@ public class PlayerController : MonoBehaviour
                                              _attackTargetLayer);
         if (hit.collider != null)
         {
-            Debug.Log($"Attack hit ! : {hit.collider.gameObject.name}");
+            if (hit.collider.TryGetComponent(out Enemy enemy))
+            {
+                enemy.Hurt(_player.damage);
+            }
+            if (hit.collider.TryGetComponent(out EnemyController enemyController))
+            {
+                enemyController.KnockBack(_direction);
+            }
         }
     }
 
