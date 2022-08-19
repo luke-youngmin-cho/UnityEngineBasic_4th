@@ -199,7 +199,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_AdditionalShaderChannelsFlag: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
@@ -1084,11 +1084,13 @@ MonoBehaviour:
   _dashState: 0
   _crouchState: 0
   _downJumpState: 0
+  _hurtState: 0
+  _dieState: 0
   _moveSpeed: 1
   _jumpForce: 3
   _slideSpeed: 3
   _dashSpeed: 3
-  _downJumpForce: 1
+  _downJumpForce: 1.5
   _attackHitCastCenter: {x: 0.2, y: 0.2}
   _attackHitCastSize: {x: 0.4, y: 0.4}
   _attackTargetLayer:
@@ -1097,7 +1099,7 @@ MonoBehaviour:
   _directionInit: 1
   _colOffsetCrouch: {x: 0, y: 0.075}
   _colSizeCrouch: {x: 0.15, y: 0.15}
-  _knockBackForce: {x: 0.5, y: 0.5}
+  _knockBackForce: {x: 0.7, y: 0.7}
 --- !u!4 &779286229
 Transform:
   m_ObjectHideFlags: 0
@@ -1197,7 +1199,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f529dd128e6064c479bb5c0e854bbe38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 5
+  damage: 1
   _hpBar: {fileID: 1282420800}
   _hpMax: 50
 --- !u!1 &829533291
@@ -1570,7 +1572,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _hpBar: {fileID: 465410026}
   _hpMax: 10
-  _damage: 5
+  _damage: 2
   _targetLayer:
     serializedVersion: 2
     m_Bits: 32768
