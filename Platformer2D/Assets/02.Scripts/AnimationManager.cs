@@ -1,0 +1,29 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class AnimationManager : MonoBehaviour
+{
+    public Animator animator { get; private set; }
+    
+    public void Play(string clipName) => animator.Play(clipName);
+    public float GetAnimationTime(string clipName)
+    {
+        RuntimeAnimatorController rac = animator.runtimeAnimatorController;
+        for (int i = 0; i < rac.animationClips.Length; i++)
+        {
+            if (rac.animationClips[i].name == clipName)
+            {
+                return rac.animationClips[i].length;
+            }
+        }
+
+        Debug.LogWarning($"GetAnimationTime : {clipName} 을 찾을 수 없습니다.");
+        return -1.0f;
+    }
+
+    private void Awake()
+    {
+        animator = GetComponent<Animator>();
+    }
+}
