@@ -61,7 +61,8 @@ public class Enemy : MonoBehaviour
                     if (player.invincible == false)
                     {
                         player.Hurt(_damage);
-                        go.GetComponent<PlayerController>().KnockBack();
+                        //go.GetComponent<PlayerController>().KnockBack();
+                        go.GetComponent<StateMachineManager>().KnockBack();
                     }
                 }
             }

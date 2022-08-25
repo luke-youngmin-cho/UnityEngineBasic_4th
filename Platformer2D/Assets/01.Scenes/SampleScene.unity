@@ -2428,6 +2428,7 @@ MonoBehaviour:
   _attackTargetLayer:
     serializedVersion: 2
     m_Bits: 1048576
+  _knockBackForce: {x: 0.5, y: 0.5}
 --- !u!70 &2098803621
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
