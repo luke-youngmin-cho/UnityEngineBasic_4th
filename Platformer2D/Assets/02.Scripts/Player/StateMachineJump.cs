@@ -84,13 +84,21 @@ public class StateMachineJump : StateMachineBase
                 }
                 break;
             case State.OnAction:
-                if (_rb.velocity.y < 0)
+                if (_rb.velocity.y < 0 ||
+                    _groundDetector.isDetected == true)
                 {
                     state++;
                 }
                 break;
             case State.Finish:
-                nextState = StateMachineManager.State.Fall;
+                if (_groundDetector.isDetected)
+                {
+                    nextState = StateMachineManager.State.Idle;
+                }
+                else
+                {
+                    nextState = StateMachineManager.State.Fall;
+                }
                 break;
             case State.Error:
                 break;

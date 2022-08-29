@@ -14,7 +14,6 @@ public class StateMachineCrouch : StateMachineBase
                               AnimationManager animationManager) 
         : base(machineState, manager, animationManager)
     {
-        shortKey = KeyCode.DownArrow;
         _col = manager.GetComponent<CapsuleCollider2D>();
         _colOffsetOrigin = _col.offset;
         _colSizeOrigin = _col.size;

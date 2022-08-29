@@ -69,16 +69,20 @@ public class StateMachineManager : MonoBehaviour
     //==========================================================================
     //*************************** Public Methods *******************************
     //==========================================================================
-    public void ChangeState(State newState)
+    public bool ChangeState(State newState)
     {
+        bool isChanged = false;
         if (state == newState ||
             _machines[newState].IsExecuteOK() == false)
-            return;
-
+            return isChanged;
+       
         _machines[state].ForceStop();
         _machines[newState].Execute();
         _current = _machines[newState];
         state = newState;
+        isChanged = true;
+
+        return isChanged;
     }
 
     public void ResetVelocity()
@@ -187,9 +191,9 @@ public class StateMachineManager : MonoBehaviour
 
         foreach (var shortKey in _states.Keys)
         {
-            if (Input.GetKeyDown(shortKey))
-            {
-                ChangeState(_states[shortKey]);
+            if (Input.GetKeyDown(shortKey) &&
+                ChangeState(_states[shortKey]))
+            {                
                 return;
             }
         }
@@ -197,6 +201,11 @@ public class StateMachineManager : MonoBehaviour
         if (Input.GetKey(KeyCode.UpArrow))
         {
             ChangeState(State.EdgeGrab);
+        }
+
+        if (Input.GetKey(KeyCode.DownArrow))
+        {
+            ChangeState(State.Crouch);
         }
 
         ChangeState(_current.UpdateState());
