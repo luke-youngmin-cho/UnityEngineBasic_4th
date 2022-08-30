@@ -100,6 +100,8 @@ public class GroundDetector : MonoBehaviour
     Collider2D tmpCol;
     private void OnDrawGizmosSelected()
     {
+        if (tmpCol == null) return;
+
         Gizmos.color = Color.green;
         Gizmos.DrawWireCube(_center, _size);
 

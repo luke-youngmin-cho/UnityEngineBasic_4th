@@ -18,6 +18,7 @@ public class StateMachineManager : MonoBehaviour
         Slide,
         Crouch,
         EdgeGrab,
+        Ladder,
         Hurt,
         Die
     }
@@ -50,21 +51,21 @@ public class StateMachineManager : MonoBehaviour
     [SerializeField] private int _directionInit;
     public bool isMovable { get; set; }
     public bool isDirectionChangable { get; set; }
-    private Vector2 _move;
+    public Vector2 move;
     [SerializeField] private float _moveSpeed = 2.0f;
 
     private AnimationManager _animationManager;
     private StateMachineBase _current;
     private Rigidbody2D _rb;
     private Player _player;
-
+    private LadderDetector _ladderDetector;
 
     [SerializeField] private Vector2 _attackHitCastCenter = new Vector2(0.2f, 0.2f);
     [SerializeField] private Vector2 _attackHitCastSize = new Vector2(0.4f, 0.4f);
     [SerializeField] private LayerMask _attackTargetLayer;
     [SerializeField] private Vector2 _knockBackForce = new Vector2(0.5f, 0.5f);
-    private float h => Input.GetAxis("Horizontal");
-    private float v => Input.GetAxis("Vertical");
+    public float h => Input.GetAxis("Horizontal");
+    public float v => Input.GetAxis("Vertical");
 
     //==========================================================================
     //*************************** Public Methods *******************************
@@ -85,9 +86,17 @@ public class StateMachineManager : MonoBehaviour
         return isChanged;
     }
 
+    public void ForceChangeState(State newState)
+    {
+        _machines[state].ForceStop();
+        _machines[newState].Execute();
+        _current = _machines[newState];
+        state = newState;
+    }
+
     public void ResetVelocity()
     {
-        _move.x = 0.0f;
+        move = Vector2.zero;
         _rb.velocity = Vector2.zero;
     }
 
@@ -111,6 +120,7 @@ public class StateMachineManager : MonoBehaviour
         _animationManager = GetComponent<AnimationManager>();
         _rb = GetComponent<Rigidbody2D>();
         _player = GetComponent<Player>();
+        _ladderDetector = GetComponent<LadderDetector>();
         yield return new WaitUntil(() => _animationManager.isReady);
 
         InitStateMachines();
@@ -181,9 +191,9 @@ public class StateMachineManager : MonoBehaviour
 
         if (isMovable)
         {
-            _move.x = h;
+            move.x = h;
 
-            if (Mathf.Abs(_move.x) > 0.0f)
+            if (Mathf.Abs(move.x) > 0.0f)
                 ChangeState(State.Move);
             else
                 ChangeState(State.Idle);
@@ -193,19 +203,43 @@ public class StateMachineManager : MonoBehaviour
         {
             if (Input.GetKeyDown(shortKey) &&
                 ChangeState(_states[shortKey]))
-            {                
-                return;
+            {
+                break;
             }
         }
 
-        if (Input.GetKey(KeyCode.UpArrow))
+
+        if (Input.GetKeyDown(KeyCode.UpArrow))
         {
-            ChangeState(State.EdgeGrab);
+            if (_ladderDetector.isGoUpPossible &&
+                ChangeState(State.Ladder))
+            {
+                Debug.Log("MachineManager : Do Ladder go up");
+            }
+        }
+        else if (Input.GetKey(KeyCode.UpArrow))
+        {
+            if (ChangeState(State.EdgeGrab))
+            {
+                Debug.Log("MachineManager : Do edge grab");
+            }
         }
 
-        if (Input.GetKey(KeyCode.DownArrow))
+        
+        if (Input.GetKeyDown(KeyCode.DownArrow))
         {
-            ChangeState(State.Crouch);
+            if (_ladderDetector.isGoDownPossible &&
+                ChangeState(State.Ladder))
+            {
+                Debug.Log("MachineManager : Do Ladder go down");
+            }
+        }
+        else if (Input.GetKey(KeyCode.DownArrow))
+        {
+            if (ChangeState(State.Crouch))
+            {
+                Debug.Log("MachineManager : Do crouch");
+            }   
         }
 
         ChangeState(_current.UpdateState());
@@ -217,7 +251,7 @@ public class StateMachineManager : MonoBehaviour
             return;
 
         _current.FixedUpdateState();
-        transform.position += new Vector3(_move.x * _moveSpeed, _move.y, 0) * Time.fixedDeltaTime;
+        transform.position += new Vector3(move.x * _moveSpeed, move.y, 0) * Time.fixedDeltaTime;
     }
 
     
