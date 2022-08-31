@@ -76,12 +76,14 @@ public class EnemyController : MonoBehaviour
     [Header("AI")]
     [SerializeField] private bool _aiAutoFollow;
     [SerializeField] private bool _aiAttackable;
-    [SerializeField] private float _aiTargetDetectRange;    
+    [SerializeField] private float _aiTargetDetectRange;
+    [SerializeField] private float _aiAttackRange;
     [SerializeField] private float _aiBehaviorTimeMin;
     [SerializeField] private float _aiBehaviorTimeMax;
     private float _aiBehaviorTimer;
 
     [Header("Movement")]
+    [SerializeField] private bool _moveEnable;
     [SerializeField] private float _moveSpeed;
     private bool _isMovable = true;
     private bool _isDirectionChangable = true;
@@ -331,6 +333,12 @@ public class EnemyController : MonoBehaviour
                     {
                         _move.x = -1.0f;
                     }
+                }
+
+                if (_aiAttackable &&
+                    Vector2.Distance(target.transform.position, _rb.position) < _aiAttackRange)
+                {
+                    // todo -> change state to attack
                 }
                 break;
             case AIState.AttackTarget:

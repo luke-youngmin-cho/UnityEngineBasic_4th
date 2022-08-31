@@ -111,8 +111,12 @@ public class StateMachineLadder : StateMachineBase
                     else if (manager.h > 0)
                         manager.direction = 1;
 
-                    manager.move.x = manager.h;
-                    manager.ForceChangeState(StateMachineManager.State.Jump);
+                    if (manager.direction != 0)
+                    {
+                        manager.move.x = manager.h;
+                        manager.ForceChangeState(StateMachineManager.State.Jump);
+                        nextState = StateMachineManager.State.Jump;
+                    }
                 }
 
                 break;
