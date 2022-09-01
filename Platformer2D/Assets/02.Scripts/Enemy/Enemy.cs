@@ -23,6 +23,13 @@ public class Enemy : MonoBehaviour
     [SerializeField] private Slider _hpBar;
     [SerializeField] private int _hpMax;
     [SerializeField] private int _damage;
+    public int damage
+    {
+        get
+        {
+            return _damage;
+        }
+    }
 
     [SerializeField] private LayerMask _targetLayer;
     private EnemyController _controller;

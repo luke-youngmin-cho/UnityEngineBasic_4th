@@ -1,0 +1,57 @@
+﻿using UnityEngine;
+
+public class Projectile : MonoBehaviour
+{
+    [SerializeField] private ParticleSystem _destroyEffect;
+    private Vector2 _moveVec;
+    private int _damage;
+    private LayerMask _targetLayer;
+    private float _elapsedFixedTime;
+    public delegate Vector2 CalcMoveVecHandler(float time);
+    private event CalcMoveVecHandler CalcMoveVec;
+    public void SetUp(Vector2 direction, int damage, LayerMask targetLayer, CalcMoveVecHandler calcMethod)
+    {
+        _moveVec = direction;
+        _damage = damage;
+        _targetLayer = targetLayer;
+        CalcMoveVec += calcMethod;
+    }
+
+    private void ShowEffect()
+    {
+        if (_destroyEffect == null)
+            return;
+
+        GameObject go = Instantiate(_destroyEffect.gameObject, transform.position, Quaternion.identity);
+        Destroy(go, _destroyEffect.main.duration);
+    }
+    private void FixedUpdate()
+    {
+        if (CalcMoveVec != null)
+        {
+            _moveVec = CalcMoveVec(_elapsedFixedTime);
+        }
+
+        transform.Translate(_moveVec * Time.deltaTime, Space.World);
+        _elapsedFixedTime += Time.fixedDeltaTime;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (1 << other.gameObject.layer == _targetLayer)
+        {
+            if (other.gameObject.TryGetComponent(out Player player))
+            {
+                player.Hurt(_damage);
+                player.GetComponent<StateMachineManager>().KnockBack();
+                ShowEffect();
+                Destroy(gameObject);
+            }
+        }
+        else if (1<< other.gameObject.layer == LayerMask.NameToLayer("Ground"))
+        {
+            ShowEffect();
+            Destroy(gameObject);
+        }
+    }
+}
