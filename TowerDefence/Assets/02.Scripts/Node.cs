@@ -19,6 +19,7 @@ public class Node : MonoBehaviour
     private void OnMouseEnter()
     {
         _renderer.material.color = _buildAvailableColor;
+        NodeManager.mouseOnNode = this;
     }
 
     private void OnMouseExit()
