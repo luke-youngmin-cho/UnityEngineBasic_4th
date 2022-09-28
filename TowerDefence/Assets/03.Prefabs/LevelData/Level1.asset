@@ -16,9 +16,17 @@ MonoBehaviour:
   moneyInit: 2000
   stagesInfo:
   - enemySpawnDataList:
-    - prefab: {fileID: 0}
-      num: 0
-    - prefab: {fileID: 0}
-      num: 0
-  - enemySpawnDataList: []
-  - enemySpawnDataList: []
+    - poolElement:
+        prefab: {fileID: 7685190164074913231, guid: 9a6e28178957f134f927cdcf20d62c3d, type: 3}
+        num: 5
+      spawnPointIndex: 0
+      goalPointIndex: 0
+      term: 1
+      delay: 0
+    - poolElement:
+        prefab: {fileID: 3787745988532606039, guid: 198d15d90b8f2294c89179898759a174, type: 3}
+        num: 3
+      spawnPointIndex: 0
+      goalPointIndex: 0
+      term: 2
+      delay: 3
