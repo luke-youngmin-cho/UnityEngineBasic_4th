@@ -7,6 +7,7 @@ public class EnemyMove : MonoBehaviour
     private Transform _tr;
     private Enemy _enemy;
     public float speed = 1.0f;
+    [SerializeField] private float _offsetY;
 
     private Pathfinder _pathFinder;
     [SerializeField]private Transform _start;
@@ -18,7 +19,7 @@ public class EnemyMove : MonoBehaviour
 
     private Vector3 _targetPos;
     private Vector3 _dir;
-    private float _posTolerance = 0.05f;
+    private float _posTolerance = 0.1f;
 
     public void SetStartEnd(Transform start, Transform end)
     {
@@ -32,7 +33,6 @@ public class EnemyMove : MonoBehaviour
         _tr = GetComponent<Transform>();
         _enemy = GetComponent<Enemy>();
         _pathFinder = GetComponent<Pathfinder>();
-        _originY = _tr.position.y;
     }
 
     private void Start()
@@ -43,6 +43,7 @@ public class EnemyMove : MonoBehaviour
         }
 
         _nextWayPoint = _wayPoints[0];
+        _originY = _tr.position.y + _offsetY;
     }
 
     private void FixedUpdate()
@@ -64,6 +65,7 @@ public class EnemyMove : MonoBehaviour
             }
         }
 
+        Debug.Log(_targetPos);
         _tr.LookAt(_targetPos);
         _tr.Translate(_dir * speed * Time.fixedDeltaTime, Space.World);
     }
