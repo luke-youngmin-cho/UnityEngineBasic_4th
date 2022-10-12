@@ -9,9 +9,13 @@ public class TowerLaserLauncher : Tower
     [SerializeField] private Transform _firePoint;
 
     [SerializeField] private float _damage;
-    private float _damageStep;
+    private int _damageStep;
     private int damageStep
     {
+        get
+        {
+            return _damageStep;
+        }
         set
         {
             _damageStep = value;
@@ -74,7 +78,7 @@ public class TowerLaserLauncher : Tower
             {
                 if ( _damageStep < 2)
                 {
-                    _damageStep++;
+                    damageStep++;
                     _damageChargeTimer = _damageChargeTime;
                 }
             }

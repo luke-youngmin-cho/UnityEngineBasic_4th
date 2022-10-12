@@ -77,7 +77,7 @@ MonoBehaviour:
   _firePoint: {fileID: 8192674320525145693}
   _damage: 5
   _damageGain: 2
-  _damageChargeTime: 2
+  _damageChargeTime: 1
 --- !u!1 &2294528630544505553
 GameObject:
   m_ObjectHideFlags: 0
