@@ -28,6 +28,8 @@ public class TowerLaserLauncher : Tower
     [SerializeField] private int _damageGain;
     [SerializeField] private float _damageChargeTime;
     private float _damageChargeTimer;
+    private BuffSlowingDown<Enemy> _slowingDownBuff = new BuffSlowingDown<Enemy>(0.5f);
+    private Enemy _enemyMem;
 
     private void FixedUpdate()
     {
@@ -46,6 +48,11 @@ public class TowerLaserLauncher : Tower
 
             if (_damageStep > 0)
                 damageStep = 0;
+
+            if (_enemyMem != null &&
+                _enemyMem.gameObject.activeSelf &&
+                _enemyMem.buffManager.IsBuffExist(_slowingDownBuff))
+                _enemyMem.buffManager.DeactiveBuff(_slowingDownBuff);
         }
         else
         {
@@ -72,7 +79,13 @@ public class TowerLaserLauncher : Tower
                 }
             }
 
-            target.GetComponent<Enemy>().hp -= (int)(_damage * (1 + _damageStep) * _damageGain * Time.fixedDeltaTime);
+            if (target.TryGetComponent(out _enemyMem))
+            {
+                _enemyMem.hp -= (int)(_damage * (1 + _damageStep) * _damageGain * Time.fixedDeltaTime);
+
+                if (_enemyMem.buffManager.IsBuffExist(_slowingDownBuff) == false)
+                    _enemyMem.buffManager.ActiveBuff(_slowingDownBuff, 9999.0f);
+            }
 
             if (_damageChargeTimer < 0)
             {

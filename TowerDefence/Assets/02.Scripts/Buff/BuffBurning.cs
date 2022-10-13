@@ -34,6 +34,7 @@ public class BuffBurning<T> : IBuff<T>
             {
                 ((IHp)target).hp -= _damage;
                 _timer = _term;
+                Debug.Log($"{target} is burning. current hp : {((IHp)target).hp}");
             }
         }
         else

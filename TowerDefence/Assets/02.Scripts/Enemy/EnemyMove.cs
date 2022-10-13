@@ -6,7 +6,6 @@ public class EnemyMove : MonoBehaviour
 {
     private Transform _tr;
     private Enemy _enemy;
-    public float speed = 1.0f;
     [SerializeField] private float _offsetY;
 
     private Pathfinder _pathFinder;
@@ -65,9 +64,8 @@ public class EnemyMove : MonoBehaviour
             }
         }
 
-        Debug.Log(_targetPos);
         _tr.LookAt(_targetPos);
-        _tr.Translate(_dir * speed * Time.fixedDeltaTime, Space.World);
+        _tr.Translate(_dir * _enemy.speed * Time.fixedDeltaTime, Space.World);
     }
 
     private void OnReachedToEnd()
