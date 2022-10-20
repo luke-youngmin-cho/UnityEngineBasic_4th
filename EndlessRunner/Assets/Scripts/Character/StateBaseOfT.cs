@@ -1,18 +1,20 @@
 ﻿using System;
 public abstract class StateBase<T> : IState<T> where T : Enum
 {
+    protected AnimationManager animationManager;
     public StateBase(StateMachineBase<T> stateMachine, T machineState)
     {
         this.stateMachine = stateMachine;
         this.machineState = machineState;
+        animationManager = stateMachine.owner.GetComponent<AnimationManager>();
     }
 
     protected StateMachineBase<T> stateMachine;
-    public IState<T>.Commands current { get; private set; }
+    public IState<T>.Commands current { get; protected set; }
 
     public virtual bool canExecute => true;
 
-    public T machineState { get; private set; }
+    public T machineState { get; protected set; }
 
     public virtual void Execute()
     {
