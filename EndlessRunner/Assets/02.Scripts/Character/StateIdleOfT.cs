@@ -1,8 +1,8 @@
 ﻿using System;
-public class StateMove<T> : StateBase<T> where T : Enum
+public class StateIdle<T> : StateBase<T> where T : Enum
 {
-    public StateMove(StateMachineBase<T> stateMachine, T machineState)
-        : base(stateMachine, machineState)
+    public StateIdle(StateMachineBase<T> stateMachine, T machineState, T canExecuteConditionMask, T nextTarget)
+        : base(stateMachine, machineState, canExecuteConditionMask, nextTarget)
     {
     }
 
@@ -16,7 +16,7 @@ public class StateMove<T> : StateBase<T> where T : Enum
                 break;
             case IState<T>.Commands.Prepare:
                 {
-                    animationManager.SetBool("DoMove", true);
+                    animationManager.SetBool("Idle", true);
                     MoveNext();
                 }
                 break;
@@ -25,7 +25,7 @@ public class StateMove<T> : StateBase<T> where T : Enum
                 break;
             case IState<T>.Commands.WaitForCastingFinished:
                 {
-                    animationManager.SetBool("DoMove", false);
+                    animationManager.SetBool("Idle", false);
                     MoveNext();
                 }
                 break;

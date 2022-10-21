@@ -2,8 +2,9 @@
 public class StateJump<T> : StateBase<T> where T : Enum
 {
     private GroundDetector _groundDetector;
-    public StateJump(StateMachineBase<T> stateMachine, T machineState) 
-        : base(stateMachine, machineState)
+
+    public StateJump(StateMachineBase<T> stateMachine, T machineState, T canExecuteConditionMask, T nextTarget)
+        : base(stateMachine, machineState, canExecuteConditionMask, nextTarget)
     {
         _groundDetector = stateMachine.owner.GetComponentInChildren<GroundDetector>();
     }
@@ -45,17 +46,26 @@ public class StateJump<T> : StateBase<T> where T : Enum
                 break;
             case IState<T>.Commands.Action:
                 {
-                    // nothing to do
+                    MoveNext();
                 }
                 break;
             case IState<T>.Commands.WaitForActionFinished:
-                MoveNext();
+                {
+                    if (_groundDetector.isDetected)
+                    {
+                        MoveNext();
+                    }
+                }
                 break;
             case IState<T>.Commands.Finish:
-                MoveNext();
+                {
+                    MoveNext();
+                }
                 break;
             case IState<T>.Commands.WaitForFinished:
-                MoveNext();
+                {
+                    next = nextTarget;
+                }
                 break;
             default:
                 break;
