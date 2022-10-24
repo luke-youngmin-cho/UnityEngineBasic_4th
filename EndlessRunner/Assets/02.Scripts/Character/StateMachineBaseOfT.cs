@@ -51,21 +51,30 @@ public class StateMachineBase<T> where T : Enum
             string typeName = "State" + value.ToString();
             Debug.Log($"Adding state... {typeName}<{typeof(T).Name}>");
             Assembly stateTypeAssembly = typeof(T).Assembly;
-            Type stateType = Type.GetType($"{typeName}`1[[{typeof(T)}{stateTypeAssembly}]]");
-            ConstructorInfo constructorInfo 
-                = stateType.GetConstructor(new Type[] { typeof(StateMachineBase<T>), 
-                                                        typeof(T),
-                                                        typeof(T),
-                                                        typeof(T) });
-            if (constructorInfo != null)
+            Type stateType = Type.GetType($"{typeName}`1[[{typeof(T)},{stateTypeAssembly}]]");
+
+            try
             {
+                ConstructorInfo constructorInfo
+                    = stateType.GetConstructor(new Type[] { typeof(StateMachineBase<T>),
+                                                            typeof(T),
+                                                            typeof(T),
+                                                            typeof(T) });
+
                 IState<T> state = constructorInfo.Invoke(new object[] { this,
                                                                         value,
                                                                         canExecuteConditionMasks[value],
                                                                         transitionPairs[value]}) as IState<T>;
                 states.Add(value, state);
             }
+            catch (Exception e)
+            {
+                Debug.LogWarning($"[StateMachineBase] : Failed to create state {value}, {e.Message}");
+            }            
         }
+
+        current = states[default(T)];
+        currentType = default(T);
         isReady = true;
     }
 }

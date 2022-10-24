@@ -18,11 +18,34 @@ public class CharacterPlayer : CharacterBase
     private StateMachineBase<StateTypes> _machine;
     [SerializeField] StateTypes _currenType => _machine.currentType;
     [SerializeField] IState<StateTypes>.Commands _currentCommand => _machine.current.current;
+
+
+    //==============================================================================
+    //****************************** Public Methods ********************************
+    //==============================================================================
+
+    public void StartMove()
+    {
+        _machine.ChangeState(StateTypes.Move);
+    }
+    
+
+    //==============================================================================
+    //****************************** Private Methods *******************************
+    //==============================================================================
+
     private void Awake()
     {
         _machine = new StateMachineBase<StateTypes>(gameObject,
                                                     GetStateExecuteConditionMask(),
                                                     GetStateTransitionPairs());
+        RegisterAllKeyActions();
+    }
+
+    private void RegisterAllKeyActions()
+    {
+        InputHandler.RegisterKeyDownAction(InputHandler.SHORTCUT_PLAYER_JUMP, 
+                                           () => _machine.ChangeState(StateTypes.Jump));
     }
 
     private void Update()
@@ -30,6 +53,7 @@ public class CharacterPlayer : CharacterBase
         Debug.Log($"{_currenType}, {_currentCommand}");
         _machine.Update();
     }
+
 
     private Dictionary<StateTypes, StateTypes> GetStateExecuteConditionMask()
     {
