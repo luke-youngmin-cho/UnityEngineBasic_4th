@@ -52,12 +52,12 @@ Material:
     m_Ints: []
     m_Floats:
     - _Alpha: 0
-    - _CurveX: 0.44
+    - _CurveX: 1.47
     - _CurveY: 0
     - _QueueControl: 0
     - _QueueOffset: 0
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 0}
     - _Emission: {r: 0, g: 0, b: 0, a: 0}
-    - _PlayerOffset: {r: 0, g: 0, b: 0, a: 0}
+    - _PlayerOffset: {r: 0, g: 1.35, b: -2.5, a: 0}
   m_BuildTextureStacks: []

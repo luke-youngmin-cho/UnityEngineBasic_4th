@@ -679,7 +679,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5450640618324685483}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!136 &681169670187858132
 CapsuleCollider:
@@ -695,68 +695,6 @@ CapsuleCollider:
   m_Height: 1.6
   m_Direction: 1
   m_Center: {x: 0, y: 0.8, z: 0}
---- !u!1 &681169670537789082
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 681169670537789081}
-  - component: {fileID: 681169670537789087}
-  - component: {fileID: 681169670537789080}
-  m_Layer: 12
-  m_Name: GroundDetector
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &681169670537789081
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 681169670537789082}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 5450640618324685483}
-  m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!135 &681169670537789087
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 681169670537789082}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.2
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &681169670537789080
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 681169670537789082}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0701170426064f4eb0b8dbbc3e1ccd5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isDetected: 0
-  _groundLayer:
-    serializedVersion: 2
-    m_Bits: 32768
 --- !u!1 &690705389327711745
 GameObject:
   m_ObjectHideFlags: 0
@@ -9256,7 +9194,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   radius: 0.1
   linkedRenderer: {fileID: 0}
-  shouldDrawGizmosThisFrame: 0
+  shouldDrawGizmosThisFrame: 1
 --- !u!1 &6952262873014306752
 GameObject:
   m_ObjectHideFlags: 0
@@ -9365,7 +9303,7 @@ ParentConstraint:
   m_TranslationAtRest: {x: 0.0558, y: 1.4819, z: 0.0762}
   m_RotationAtRest: {x: 0, y: 0, z: 0}
   m_TranslationOffsets:
-  - {x: 0.055721257, y: 0.0758574, z: 0.09893796}
+  - {x: 0.055721257, y: 0.07585752, z: 0.09893787}
   m_RotationOffsets:
   - {x: -6.829918, y: 0, z: 0}
   m_AffectTranslationX: 1
@@ -9446,7 +9384,7 @@ MonoBehaviour:
   radius: 0.13
   height: 0.18
   linkedRenderer: {fileID: 0}
-  shouldDrawGizmosThisFrame: 0
+  shouldDrawGizmosThisFrame: 1
 --- !u!1 &6952262873478814930
 GameObject:
   m_ObjectHideFlags: 0
@@ -9494,7 +9432,7 @@ MonoBehaviour:
   radius: 0.028
   height: 0.03
   linkedRenderer: {fileID: 0}
-  shouldDrawGizmosThisFrame: 0
+  shouldDrawGizmosThisFrame: 1
 --- !u!1 &6952262873497864334
 GameObject:
   m_ObjectHideFlags: 0
@@ -9542,7 +9480,7 @@ MonoBehaviour:
   radius: 0.05
   height: 0.45
   linkedRenderer: {fileID: 0}
-  shouldDrawGizmosThisFrame: 0
+  shouldDrawGizmosThisFrame: 1
 --- !u!1 &6952262873529549321
 GameObject:
   m_ObjectHideFlags: 0
@@ -9590,7 +9528,7 @@ MonoBehaviour:
   radius: 0.028
   height: 0.03
   linkedRenderer: {fileID: 0}
-  shouldDrawGizmosThisFrame: 0
+  shouldDrawGizmosThisFrame: 1
 --- !u!1 &6952262873534758431
 GameObject:
   m_ObjectHideFlags: 0
@@ -9638,7 +9576,7 @@ MonoBehaviour:
   radius: 0.06
   height: 0.3
   linkedRenderer: {fileID: 0}
-  shouldDrawGizmosThisFrame: 0
+  shouldDrawGizmosThisFrame: 1
 --- !u!1 &6952262873657720297
 GameObject:
   m_ObjectHideFlags: 0
@@ -9686,7 +9624,7 @@ MonoBehaviour:
   radius: 0.07
   height: 0.15
   linkedRenderer: {fileID: 0}
-  shouldDrawGizmosThisFrame: 0
+  shouldDrawGizmosThisFrame: 1
 --- !u!1 &6952262873784056358
 GameObject:
   m_ObjectHideFlags: 0
@@ -9734,7 +9672,7 @@ MonoBehaviour:
   radius: 0.05
   height: 0.18
   linkedRenderer: {fileID: 0}
-  shouldDrawGizmosThisFrame: 0
+  shouldDrawGizmosThisFrame: 1
 --- !u!1 &6952262873809552841
 GameObject:
   m_ObjectHideFlags: 0
@@ -9843,7 +9781,7 @@ ParentConstraint:
   m_TranslationAtRest: {x: -0.0558, y: 1.4819, z: 0.0762}
   m_RotationAtRest: {x: 0, y: 0, z: 0}
   m_TranslationOffsets:
-  - {x: -0.05587874, y: 0.0758574, z: 0.09893796}
+  - {x: -0.05587874, y: 0.07585752, z: 0.09893787}
   m_RotationOffsets:
   - {x: -6.829918, y: 0, z: 0}
   m_AffectTranslationX: 1
@@ -9924,7 +9862,7 @@ MonoBehaviour:
   radius: 0.05
   height: 0.45
   linkedRenderer: {fileID: 0}
-  shouldDrawGizmosThisFrame: 0
+  shouldDrawGizmosThisFrame: 1
 --- !u!1 &6952262874051178179
 GameObject:
   m_ObjectHideFlags: 0
@@ -10020,7 +9958,7 @@ MonoBehaviour:
   radius: 0.04
   height: 0.12
   linkedRenderer: {fileID: 0}
-  shouldDrawGizmosThisFrame: 0
+  shouldDrawGizmosThisFrame: 1
 --- !u!1 &6952262874171946149
 GameObject:
   m_ObjectHideFlags: 0
@@ -10068,7 +10006,7 @@ MonoBehaviour:
   radius: 0.05
   height: 0.18
   linkedRenderer: {fileID: 0}
-  shouldDrawGizmosThisFrame: 0
+  shouldDrawGizmosThisFrame: 1
 --- !u!1 &6952262874388463093
 GameObject:
   m_ObjectHideFlags: 0
@@ -10115,7 +10053,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   radius: 0.078
   linkedRenderer: {fileID: 0}
-  shouldDrawGizmosThisFrame: 0
+  shouldDrawGizmosThisFrame: 1
 --- !u!1 &6952262874509479206
 GameObject:
   m_ObjectHideFlags: 0
@@ -10163,7 +10101,7 @@ MonoBehaviour:
   radius: 0.11
   height: 0.09
   linkedRenderer: {fileID: 0}
-  shouldDrawGizmosThisFrame: 0
+  shouldDrawGizmosThisFrame: 1
 --- !u!1 &6952262874509715913
 GameObject:
   m_ObjectHideFlags: 0
@@ -10211,7 +10149,7 @@ MonoBehaviour:
   radius: 0.04
   height: 0.2
   linkedRenderer: {fileID: 0}
-  shouldDrawGizmosThisFrame: 0
+  shouldDrawGizmosThisFrame: 1
 --- !u!1 &6952262874720645715
 GameObject:
   m_ObjectHideFlags: 0
@@ -10259,7 +10197,7 @@ MonoBehaviour:
   radius: 0.04
   height: 0.12
   linkedRenderer: {fileID: 0}
-  shouldDrawGizmosThisFrame: 0
+  shouldDrawGizmosThisFrame: 1
 --- !u!1 &6952262874741261815
 GameObject:
   m_ObjectHideFlags: 0
@@ -10355,7 +10293,7 @@ MonoBehaviour:
   radius: 0.04
   height: 0.2
   linkedRenderer: {fileID: 0}
-  shouldDrawGizmosThisFrame: 0
+  shouldDrawGizmosThisFrame: 1
 --- !u!1 &6952262874819312652
 GameObject:
   m_ObjectHideFlags: 0
@@ -10403,7 +10341,7 @@ MonoBehaviour:
   radius: 0.06
   height: 0.3
   linkedRenderer: {fileID: 0}
-  shouldDrawGizmosThisFrame: 0
+  shouldDrawGizmosThisFrame: 1
 --- !u!1 &6953209819065640479
 GameObject:
   m_ObjectHideFlags: 0
@@ -12746,6 +12684,7 @@ GameObject:
   - component: {fileID: 681169670039517552}
   - component: {fileID: 681169670039517562}
   - component: {fileID: 2969325308868607493}
+  - component: {fileID: 3733021104242877313}
   m_Layer: 10
   m_Name: Player
   m_TagString: Untagged
@@ -12769,7 +12708,6 @@ Transform:
   - {fileID: 6913776701968357124}
   - {fileID: 6952262873014306753}
   - {fileID: 6952262873809558070}
-  - {fileID: 681169670537789081}
   - {fileID: 681169670187858133}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -12938,6 +12876,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02c88dbe14a8ef84193d847498492e28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  jumpForce: 0
+  _groundDetector: {fileID: 0}
+  _wallDetector_L: {fileID: 0}
+  _wallDetector_R: {fileID: 0}
+  _movement: {fileID: 0}
 --- !u!114 &2969325308868607493
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12950,6 +12893,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85eb697a6b150a84c813eaafbb477df3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &3733021104242877313
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9079196494054555832}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0701170426064f4eb0b8dbbc3e1ccd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isDetected: 0
+  _offset: {x: 0, y: -0.1, z: 0}
+  _radius: 0.2
+  _groundLayer:
+    serializedVersion: 2
+    m_Bits: 65536
 --- !u!1 &9141953643197079004
 GameObject:
   m_ObjectHideFlags: 0

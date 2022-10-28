@@ -64,8 +64,8 @@ public class Movement : MonoBehaviour
     {
         _rb = GetComponent<Rigidbody>();
         _centerPos = transform.position;
-        _leftPos = transform.position + Vector3.left * 1.5f;
-        _rightPos = transform.position + Vector3.right * 1.5f;
+        _leftPos = transform.position + Vector3.left;
+        _rightPos = transform.position + Vector3.right;
         _current = Pos.Center;
         isMovable = true;
     }
