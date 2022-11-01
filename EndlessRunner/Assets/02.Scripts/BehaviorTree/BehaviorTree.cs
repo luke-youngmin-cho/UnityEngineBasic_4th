@@ -6,218 +6,197 @@ using Unity.VisualScripting;
 using UnityEngine;
 
 
-namespace BehaviorTree
-{
-    public enum ReturnTypes
+namespace BT
+{    
+
+    public abstract class BehaviorTree
     {
-        Success,
-        Failure,
-        OnRunning
-    }
+        public abstract RootNode Root { get; set; }
+        public abstract void Init();
+        public abstract ReturnTypes Tick();
 
-    public abstract class Node
-    {
-        public abstract ReturnTypes Invoke();
-    }
-
-    public class Root : Node
-    {
-        public Node Child;
-
-        public override ReturnTypes Invoke()
+        public enum ReturnTypes
         {
-            return Child.Invoke();
+            Success,
+            Failure,
+            OnRunning
         }
 
-        public void SetChild(Node child)
+        public abstract class Node
         {
-            Child = child;
-        }
-    }
-
-    public class Execution : Node
-    {
-        public Func<ReturnTypes> Function;
-
-        public Execution(Func<ReturnTypes> function)
-        {
-            Function = function;
+            public abstract ReturnTypes Invoke();
         }
 
-        public override ReturnTypes Invoke()
+        public class RootNode : Node
         {
-            return Function.Invoke();
-        }
-    }
+            public Node Child;
 
-    public abstract class CompositeNode : Node
-    {
-        public List<Node> Children;
-        public void AddChild(Node child) 
-        {
-            Children.Add(child);
-        }
-
-        public IEnumerable<Node> GetChildren() => Children;
-    }
-
-    public class ConditionNode : Node
-    {
-        public Node Child;
-        public event Func<bool> Condition;
-
-        public ConditionNode(Func<bool> condition)
-        {
-            Condition = condition;
-        }
-
-        public void SetChild(Node child)
-        {
-            Child = child;
-        }
-
-        public override ReturnTypes Invoke()
-        {
-            if (Condition.Invoke())
+            public override ReturnTypes Invoke()
             {
                 return Child.Invoke();
             }
-            return ReturnTypes.Failure;
-        }
-    }
 
-    public abstract class Decorator : Node
-    {
-        public Node Child;
-
-        public void SetChild(Node child)
-        {
-            Child = child;
-        }
-        public override ReturnTypes Invoke()
-        {
-            return Decorate(Child.Invoke());
-        }
-
-        protected abstract ReturnTypes Decorate(ReturnTypes childReturn);
-    }
-
-    public class Repeater : Decorator
-    {
-        public event Func<bool> Condition;
-        protected override ReturnTypes Decorate(ReturnTypes childReturn)
-        {
-            if (Condition.Invoke())
+            public void SetChild(Node child)
             {
-                return ReturnTypes.OnRunning;
+                Child = child;
+            }
+        }
+
+        public class Execution : Node
+        {
+            public Func<ReturnTypes> Function;
+
+            public Execution(Func<ReturnTypes> function)
+            {
+                Function = function;
             }
 
-            return childReturn;
-        }
-    }
-
-    public class Inverter : Decorator
-    {
-        protected override ReturnTypes Decorate(ReturnTypes childReturn)
-        {
-            switch (childReturn)
+            public override ReturnTypes Invoke()
             {
-                case ReturnTypes.Success:
-                    return ReturnTypes.Failure;
-                case ReturnTypes.Failure:
-                    return ReturnTypes.Success;
-                case ReturnTypes.OnRunning:
+                return Function.Invoke();
+            }
+        }
+
+        public abstract class CompositeNode : Node
+        {
+            public List<Node> Children;
+            public void AddChild(Node child)
+            {
+                Children.Add(child);
+            }
+
+            public IEnumerable<Node> GetChildren() => Children;
+        }
+
+        public class ConditionNode : Node
+        {
+            public Node Child;
+            public event Func<bool> Condition;
+
+            public ConditionNode(Func<bool> condition)
+            {
+                Condition = condition;
+            }
+
+            public void SetChild(Node child)
+            {
+                Child = child;
+            }
+
+            public override ReturnTypes Invoke()
+            {
+                if (Condition.Invoke())
+                {
+                    return Child.Invoke();
+                }
+                return ReturnTypes.Failure;
+            }
+        }
+
+        public abstract class Decorator : Node
+        {
+            public Node Child;
+
+            public void SetChild(Node child)
+            {
+                Child = child;
+            }
+            public override ReturnTypes Invoke()
+            {
+                return Decorate(Child.Invoke());
+            }
+
+            protected abstract ReturnTypes Decorate(ReturnTypes childReturn);
+        }
+
+        public class Repeater : Decorator
+        {
+            public event Func<bool> Condition;
+            protected override ReturnTypes Decorate(ReturnTypes childReturn)
+            {
+                if (Condition.Invoke())
+                {
                     return ReturnTypes.OnRunning;
-                default:
-                    throw new Exception("[BehaviorTree_Inverter] : Wrong return type");
+                }
+
+                return childReturn;
             }
         }
-    }
 
-    public class Selector : CompositeNode
-    {
-        private ReturnTypes _tmpResult;
-        public override ReturnTypes Invoke()
+        public class Inverter : Decorator
         {
-            foreach (var child in GetChildren())
+            protected override ReturnTypes Decorate(ReturnTypes childReturn)
             {
-                _tmpResult = child.Invoke();
-
-                if (_tmpResult == ReturnTypes.Success ||
-                    _tmpResult == ReturnTypes.OnRunning)
+                switch (childReturn)
                 {
-                    return _tmpResult;
+                    case ReturnTypes.Success:
+                        return ReturnTypes.Failure;
+                    case ReturnTypes.Failure:
+                        return ReturnTypes.Success;
+                    case ReturnTypes.OnRunning:
+                        return ReturnTypes.OnRunning;
+                    default:
+                        throw new Exception("[BehaviorTree_Inverter] : Wrong return type");
                 }
             }
-            return ReturnTypes.Failure;
         }
-    }
 
-    public class RandomSelector : CompositeNode
-    {
-        private ReturnTypes _tmpResult;
-        public override ReturnTypes Invoke()
+        public class Selector : CompositeNode
         {
-            foreach (var child in GetChildren().OrderBy(node => Guid.NewGuid()))
+            private ReturnTypes _tmpResult;
+            public override ReturnTypes Invoke()
             {
-                _tmpResult = child.Invoke();
-
-                if (_tmpResult == ReturnTypes.Success ||
-                    _tmpResult == ReturnTypes.OnRunning)
+                foreach (var child in GetChildren())
                 {
-                    return _tmpResult;
-                }
-            }
-            return ReturnTypes.Failure;
-        }
-    }
+                    _tmpResult = child.Invoke();
 
-    public class Sequence : CompositeNode
-    {
-        private ReturnTypes _tmpResult;
-        public override ReturnTypes Invoke()
+                    if (_tmpResult == ReturnTypes.Success ||
+                        _tmpResult == ReturnTypes.OnRunning)
+                    {
+                        return _tmpResult;
+                    }
+                }
+                return ReturnTypes.Failure;
+            }
+        }
+
+        public class RandomSelector : CompositeNode
         {
-            foreach (var child in GetChildren())
+            private ReturnTypes _tmpResult;
+            public override ReturnTypes Invoke()
             {
-                _tmpResult = child.Invoke();
-
-                if (_tmpResult == ReturnTypes.Failure ||
-                    _tmpResult == ReturnTypes.OnRunning)
+                foreach (var child in GetChildren().OrderBy(node => Guid.NewGuid()))
                 {
-                    return _tmpResult;
+                    _tmpResult = child.Invoke();
+
+                    if (_tmpResult == ReturnTypes.Success ||
+                        _tmpResult == ReturnTypes.OnRunning)
+                    {
+                        return _tmpResult;
+                    }
                 }
+                return ReturnTypes.Failure;
             }
-            return ReturnTypes.Success;
         }
-    }
 
-    public abstract class BehaviorTree : MonoBehaviour
-    {
-        public abstract Root Root { get; set; }
-        public abstract void Init();
-        public abstract ReturnTypes Tick();
-    }
-
-    public class BehaviorTreeForEnemy : BehaviorTree
-    {
-        public override Root Root { get; set; }
-
-        public override void Init()
+        public class Sequence : CompositeNode
         {
-            Root = new Root();
+            private ReturnTypes _tmpResult;
+            public override ReturnTypes Invoke()
+            {
+                foreach (var child in GetChildren())
+                {
+                    _tmpResult = child.Invoke();
 
-            Selector selector1 = new Selector();
-            Root.SetChild(selector1);
-            ConditionNode ifPlayerHit = new ConditionNode(() => true);
-            ifPlayerHit.SetChild(new Execution(() => ReturnTypes.Success));
-            selector1.AddChild(ifPlayerHit);
-
+                    if (_tmpResult == ReturnTypes.Failure ||
+                        _tmpResult == ReturnTypes.OnRunning)
+                    {
+                        return _tmpResult;
+                    }
+                }
+                return ReturnTypes.Success;
+            }
         }
-
-        public override ReturnTypes Tick()
-        {
-            return Root.Invoke();
-        }
-    }
+    }    
 }
 
