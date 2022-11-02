@@ -11,7 +11,7 @@ namespace BT
 
     public abstract class BehaviorTree
     {
-        public abstract RootNode Root { get; set; }
+        public abstract RootNode Root { get; set; }        
         public abstract void Init();
         public abstract ReturnTypes Tick();
 
@@ -24,16 +24,22 @@ namespace BT
 
         public abstract class Node
         {
-            public abstract ReturnTypes Invoke();
+            public abstract ReturnTypes Invoke(out Node leaf);
         }
 
         public class RootNode : Node
         {
             public Node Child;
-
-            public override ReturnTypes Invoke()
+            public Node RunningNode { get; set; }            
+            public override ReturnTypes Invoke(out Node leaf)
             {
-                return Child.Invoke();
+                ReturnTypes result = Child.Invoke(out leaf);
+                if (result == ReturnTypes.OnRunning)
+                    RunningNode = leaf;
+                else
+                    RunningNode = null;
+
+                return result;
             }
 
             public void SetChild(Node child)
@@ -51,8 +57,9 @@ namespace BT
                 Function = function;
             }
 
-            public override ReturnTypes Invoke()
+            public override ReturnTypes Invoke(out Node leaf)
             {
+                leaf = this;
                 return Function.Invoke();
             }
         }
@@ -60,9 +67,10 @@ namespace BT
         public abstract class CompositeNode : Node
         {
             public List<Node> Children;
-            public void AddChild(Node child)
+            public CompositeNode AddChild(Node child)
             {
                 Children.Add(child);
+                return this;
             }
 
             public IEnumerable<Node> GetChildren() => Children;
@@ -83,11 +91,12 @@ namespace BT
                 Child = child;
             }
 
-            public override ReturnTypes Invoke()
+            public override ReturnTypes Invoke(out Node leaf)
             {
+                leaf = null;
                 if (Condition.Invoke())
                 {
-                    return Child.Invoke();
+                    return Child.Invoke(out leaf);
                 }
                 return ReturnTypes.Failure;
             }
@@ -101,9 +110,9 @@ namespace BT
             {
                 Child = child;
             }
-            public override ReturnTypes Invoke()
+            public override ReturnTypes Invoke(out Node leaf)
             {
-                return Decorate(Child.Invoke());
+                return Decorate(Child.Invoke(out leaf));
             }
 
             protected abstract ReturnTypes Decorate(ReturnTypes childReturn);
@@ -144,11 +153,12 @@ namespace BT
         public class Selector : CompositeNode
         {
             private ReturnTypes _tmpResult;
-            public override ReturnTypes Invoke()
+            public override ReturnTypes Invoke(out Node leaf)
             {
+                leaf = null;
                 foreach (var child in GetChildren())
                 {
-                    _tmpResult = child.Invoke();
+                    _tmpResult = child.Invoke(out leaf);
 
                     if (_tmpResult == ReturnTypes.Success ||
                         _tmpResult == ReturnTypes.OnRunning)
@@ -163,11 +173,12 @@ namespace BT
         public class RandomSelector : CompositeNode
         {
             private ReturnTypes _tmpResult;
-            public override ReturnTypes Invoke()
+            public override ReturnTypes Invoke(out Node leaf)
             {
+                leaf = null;
                 foreach (var child in GetChildren().OrderBy(node => Guid.NewGuid()))
                 {
-                    _tmpResult = child.Invoke();
+                    _tmpResult = child.Invoke(out leaf);
 
                     if (_tmpResult == ReturnTypes.Success ||
                         _tmpResult == ReturnTypes.OnRunning)
@@ -182,11 +193,12 @@ namespace BT
         public class Sequence : CompositeNode
         {
             private ReturnTypes _tmpResult;
-            public override ReturnTypes Invoke()
+            public override ReturnTypes Invoke(out Node leaf)
             {
+                leaf = null;
                 foreach (var child in GetChildren())
                 {
-                    _tmpResult = child.Invoke();
+                    _tmpResult = child.Invoke(out leaf);
 
                     if (_tmpResult == ReturnTypes.Failure ||
                         _tmpResult == ReturnTypes.OnRunning)
