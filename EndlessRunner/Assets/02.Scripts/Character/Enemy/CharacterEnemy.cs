@@ -84,7 +84,7 @@ public class CharacterEnemy : CharacterBase
         public override RootNode Root { get; set; }
         public Selector SelectorForTarget;
         public Sequence SequenceWhenTargetDetected;
-        public ConditionNode ConditionPlayerDetected;
+        public ConditionNode ConditionPlayerNotDetected;
         public ConditionNode ConditionMovable;
         public RandomSelector RandomSelectorForMovement;
         public Execution ExecutionDetectPlayer;
@@ -119,6 +119,7 @@ public class CharacterEnemy : CharacterBase
                                         }
                                         else
                                         {
+                                            _owner.target = null;
                                             return ReturnTypes.Failure;
                                         }
                                     });
@@ -189,7 +190,7 @@ public class CharacterEnemy : CharacterBase
                                                       {
                                                           _owner.direction = Vector3.up * 180.0f;
                                                           _owner.rb.velocity = Vector3.zero;
-                                                          _owner.rb.AddRelativeForce(new Vector3(0.0f, 1.0f, 1.0f), ForceMode.Impulse);
+                                                          _owner.rb.AddRelativeForce(new Vector3(0.0f, 1.0f, 1.0f) * _owner.jumpForce, ForceMode.Impulse);
                                                           return ReturnTypes.Success;
                                                       }
                                                       else
@@ -204,7 +205,7 @@ public class CharacterEnemy : CharacterBase
                                                       {
                                                           _owner.direction = Vector3.up * 0.0f;
                                                           _owner.rb.velocity = Vector3.zero;
-                                                          _owner.rb.AddRelativeForce(new Vector3(0.0f, 1.0f, 1.0f), ForceMode.Impulse);
+                                                          _owner.rb.AddRelativeForce(new Vector3(0.0f, 1.0f, 1.0f) * _owner.jumpForce, ForceMode.Impulse);
                                                           return ReturnTypes.Success;
                                                       }
                                                       else
@@ -220,12 +221,12 @@ public class CharacterEnemy : CharacterBase
             ConditionMovable = new ConditionNode(() => _owner.movable);
             ConditionMovable.SetChild(RandomSelectorForMovement);
 
-            ConditionPlayerDetected = new ConditionNode(() => _owner.target);
-            ConditionPlayerDetected.SetChild(ConditionMovable);
+            ConditionPlayerNotDetected = new ConditionNode(() => _owner.target == null);
+            ConditionPlayerNotDetected.SetChild(ConditionMovable);
 
             SelectorForTarget = new Selector();
             SelectorForTarget.AddChild(SequenceWhenTargetDetected)
-                             .AddChild(ConditionPlayerDetected);
+                             .AddChild(ConditionPlayerNotDetected);
 
             Root.SetChild(SelectorForTarget);
         }
@@ -251,15 +252,22 @@ public class CharacterEnemy : CharacterBase
 
     protected override void Awake()
     {
+        base.Awake();
         _machine = new StateMachineBase<StateTypes>(gameObject,
                                                     GetStateExecuteConditionMask(),
                                                     GetStateTransitionParis());
         _aiTree = new BehaviorTreeForEnemy(this);
+        GameStateManager.instance.OnStateChanged += OnGameStateChanged;
     }
 
     private void Start()
     {
         _aiTree.Init();
+    }
+
+    private void OnDestroy()
+    {
+        GameStateManager.instance.OnStateChanged -= OnGameStateChanged;
     }
 
     private void Update()
@@ -290,5 +298,18 @@ public class CharacterEnemy : CharacterBase
         result.Add(StateTypes.Hurt, StateTypes.Move);
         result.Add(StateTypes.Die, StateTypes.Move);
         return result;
+    }
+
+    private void OnGameStateChanged(GameStates newState)
+    {
+        enabled = newState == GameStates.Play;
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, detectRange);
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, detectAttackRange);
     }
 }

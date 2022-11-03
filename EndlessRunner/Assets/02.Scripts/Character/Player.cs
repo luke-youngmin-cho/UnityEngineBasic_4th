@@ -41,6 +41,11 @@ public class Player : MonoBehaviour
     private CharacterPlayer _character;
     [SerializeField] private LayerMask _itemLayer;
 
+    public void StartMove()
+    {
+        _character.StartMove();
+    }
+
     private void Awake()
     {
         instance = this;
@@ -52,6 +57,13 @@ public class Player : MonoBehaviour
 
         _hpMax = _hpIcons.Count;
         hp = _hpInit;
+
+        GameStateManager.instance.OnStateChanged += OnGameStateChanged;
+    }
+
+    private void OnDestroy()
+    {
+        GameStateManager.instance.OnStateChanged -= OnGameStateChanged;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -61,5 +73,10 @@ public class Player : MonoBehaviour
             other.gameObject.GetComponent<Item>().OnEarn();
             Destroy(other.gameObject);
         }
+    }
+
+    private void OnGameStateChanged(GameStates newState)
+    {
+        enabled = newState == GameStates.Play;
     }
 }
