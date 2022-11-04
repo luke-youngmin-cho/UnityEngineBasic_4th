@@ -10,7 +10,7 @@ public class HitDetector : MonoBehaviour
     {
         if (1 << collision.gameObject.layer == _mapUnitLayer)
         {
-            Player.instance.hp -= 10;
+            Player.instance.character.hp -= 10;
         }
     }
 }

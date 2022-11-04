@@ -6,6 +6,6 @@ public class ItemHPPosionS : Item
 {
     public override void OnEarn()
     {
-        Player.instance.hp += 1;
+        Player.instance.character.hp += 1;
     }
 }

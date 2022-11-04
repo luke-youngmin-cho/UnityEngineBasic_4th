@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    [SerializeField] private GameObject _pausedPanel;
     public void StartGame()
     {
         Player.instance.StartMove();
@@ -12,7 +13,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        GameStateManager.instance.SetState(GameStates.Paused);
+        GameStateManager.instance.SetState(GameStates.Idle);
     }
 
     private void Update()
@@ -23,6 +24,11 @@ public class GameManager : MonoBehaviour
                 GameStateManager.instance.Current
                 == GameStates.Play ? GameStates.Paused : GameStates.Play
             );
+
+            if (GameStateManager.instance.Current == GameStates.Paused)
+                _pausedPanel.SetActive(true);
+            else
+                _pausedPanel.SetActive(false);
         }
     }
 }

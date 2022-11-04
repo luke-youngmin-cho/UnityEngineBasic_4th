@@ -16,7 +16,7 @@ public class StateIdle<T> : StateBase<T> where T : Enum
                 break;
             case IState<T>.Commands.Prepare:
                 {
-                    animationManager.SetBool("Idle", true);
+                    animationManager.SetBool("DoIdle", true);
                     MoveNext();
                 }
                 break;
@@ -25,7 +25,7 @@ public class StateIdle<T> : StateBase<T> where T : Enum
                 break;
             case IState<T>.Commands.WaitForCastingFinished:
                 {
-                    animationManager.SetBool("Idle", false);
+                    animationManager.SetBool("DoIdle", false);
                     MoveNext();
                 }
                 break;

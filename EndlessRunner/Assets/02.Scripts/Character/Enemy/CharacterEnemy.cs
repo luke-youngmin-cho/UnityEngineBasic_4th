@@ -21,11 +21,7 @@ public class CharacterEnemy : CharacterBase
     [SerializeField] private IState<StateTypes>.Commands _currentCommand => _machine.current.current;
 
     public GroundDetector groundDetector;
-
-    public LayerMask targetLayer;
-    public GameObject target;
-    public float detectRange;
-    public float detectAttackRange;
+    
     public bool movable;    
     public Vector3 direction
     {
@@ -38,6 +34,8 @@ public class CharacterEnemy : CharacterBase
             transform.eulerAngles = value;
         }
     }
+
+    public override int hp { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
     public class BehaviorTreeForEnemy : BehaviorTree
     {
@@ -156,20 +154,18 @@ public class CharacterEnemy : CharacterBase
                                             {
                                                 if (Attackable)
                                                 {
-                                                    if (_owner._machine.currentType == StateTypes.Attack)
+                                                    if (Root.RunningNode == null)
                                                     {
-                                                        if (_owner._machine.current.IsBusy)
-                                                            return ReturnTypes.OnRunning;
-                                                        else
-                                                            return ReturnTypes.Success;
+                                                        _owner.ChangeMachineState(StateTypes.Attack);
+                                                        return ReturnTypes.OnRunning;
+                                                    }
+                                                    else if (_owner._machine.currentType == StateTypes.Attack)
+                                                    {
+                                                        return ReturnTypes.OnRunning;
                                                     }
                                                     else
                                                     {
-                                                        _owner.ChangeMachineState(StateTypes.Attack);
-                                                        if (_owner._machine.currentType == StateTypes.Attack)
-                                                            return ReturnTypes.OnRunning;
-                                                        else
-                                                            return ReturnTypes.Failure;
+                                                        return ReturnTypes.Success;
                                                     }
                                                 }
                                                 else
@@ -238,6 +234,8 @@ public class CharacterEnemy : CharacterBase
             if (Root.RunningNode != null)
             {
                 result = Root.RunningNode.Invoke(out dummy);
+                if (result != ReturnTypes.OnRunning)
+                    Root.RunningNode = null;
             }
             else 
             {
@@ -294,7 +292,7 @@ public class CharacterEnemy : CharacterBase
         result.Add(StateTypes.Idle, StateTypes.Idle);
         result.Add(StateTypes.Move, StateTypes.Move);
         result.Add(StateTypes.Jump, StateTypes.Move);
-        result.Add(StateTypes.Attack, StateTypes.Move);
+        result.Add(StateTypes.Attack, StateTypes.Idle);
         result.Add(StateTypes.Hurt, StateTypes.Move);
         result.Add(StateTypes.Die, StateTypes.Move);
         return result;

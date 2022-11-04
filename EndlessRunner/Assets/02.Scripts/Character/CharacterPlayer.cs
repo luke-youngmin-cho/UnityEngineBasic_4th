@@ -2,8 +2,45 @@
 using System.Collections.Generic;
 using Unity.Animations.SpringBones.GameObjectExtensions;
 using UnityEngine;
+using UnityEngine.TextCore.Text;
+
 public class CharacterPlayer : CharacterBase
 {
+    private int _hp;
+    public override int hp
+    {
+        get
+        {
+            return _hp;
+        }
+        set
+        {
+            if (value < 0)
+                value = 0;
+            else if (value > _hpMax)
+                value = _hpMax;
+
+            _hp = value;
+
+            for (int i = 0; i < _hpMax; i++)
+            {
+                if (i < value - 1)
+                    _hpIcons[i].SetActive(true);
+                else
+                    _hpIcons[i].SetActive(false);
+            }
+
+            if (value == 0)
+            {
+                ChangeMachineState(StateTypes.Die);
+            }
+        }
+    }
+    [SerializeField] private int _hpInit = 3;
+    private int _hpMax;
+    [SerializeField] private Transform _hpIconContent;
+    private List<GameObject> _hpIcons;
+
     [Flags]
     public enum StateTypes
     {
@@ -45,8 +82,17 @@ public class CharacterPlayer : CharacterBase
     //****************************** Private Methods *******************************
     //==============================================================================
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
+
+        _hpIcons = new List<GameObject>();
+        for (int i = 0; i < _hpIconContent.childCount; i++)
+            _hpIcons.Add(_hpIconContent.GetChild(i).gameObject);
+
+        _hpMax = _hpIcons.Count;
+        hp = _hpInit;
+
         _machine = new StateMachineBase<StateTypes>(gameObject,
                                                     GetStateExecuteConditionMask(),
                                                     GetStateTransitionPairs());
@@ -93,7 +139,7 @@ public class CharacterPlayer : CharacterBase
 
     private void Update()
     {
-        Debug.Log($"{_currenType}, {_currentCommand}");
+        //Debug.Log($"{_currenType}, {_currentCommand}");
         _machine.Update();
     }
 
