@@ -2,13 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StateBase<T> : IState<T> where T : Enum
+public abstract class StateBase<T> : IState<T> where T : Enum
 {
+    public IState<T>.Commands current { get; protected set; }
+
     public T stateType { get; protected set; }
 
     public bool canExecute => (_condition != null ? _condition.Invoke() : true) &&
                               _animationManager.isPreviousStateMachineHasFinished &&
                               _animationManager.isPreviousStateHasFinished;
+
 
     private Func<bool> _condition;
     private List<KeyValuePair<Func<bool>, T>> _transitions;
@@ -22,30 +25,53 @@ public class StateBase<T> : IState<T> where T : Enum
         this._animationManager = owner.GetComponent<AnimationManager>();
     }
 
-    public void Execute()
+    public virtual void Execute()
     {
-        Workflow().Reset();
+        current = IState<T>.Commands.Prepare;
     }
-    public void Stop()
+    public virtual void Stop()
     {
-        Workflow().Reset();
+        
     }
-    public T Tick()
+    public virtual T Tick()
     {
-        return Workflow().Current;
+        T next = stateType;
+
+        switch (current)
+        {
+            case IState<T>.Commands.Idle:
+                break;
+            case IState<T>.Commands.Prepare:
+                MoveNext();
+                break;
+            case IState<T>.Commands.Casting:
+                MoveNext();
+                break;
+            case IState<T>.Commands.OnAction:
+                MoveNext();
+                break;
+            case IState<T>.Commands.Finish:
+                MoveNext();
+                break;
+            case IState<T>.Commands.WaitUntilFinished:
+                foreach (var transition in _transitions)
+                {
+                    if (transition.Key.Invoke())
+                    {
+                        next = transition.Value;
+                    }
+                }
+                break;
+            default:
+                break;
+        }
+
+        return next;
     }
 
-    public IEnumerator<T> Workflow()
+    public void MoveNext()
     {
-        // 다음 상태로 transition 가능한지 체크.. (가장 마지막 상태에 구현해야하는 내용)
-        while (true)
-        {
-            foreach (var transition in _transitions)
-            {
-                if (transition.Key.Invoke())
-                    yield return transition.Value;
-            }
-            yield return stateType;
-        }
-    }   
+        if (current < IState<T>.Commands.WaitUntilFinished)
+            current++;
+    }
 }
