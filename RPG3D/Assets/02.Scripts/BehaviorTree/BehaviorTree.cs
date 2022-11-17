@@ -11,9 +11,122 @@ namespace BT
         Failure,
         Running
     }
+    
+    public class BTTester
+    {
+        void Test()
+        {
+            new BehaviorTree()
+                .StartBuild()
+                    .Sequence()
+                        .Condition(() => true)
+                            .Execution(() => Status.Success)
+                        .Execution(() => Status.Success)
+                        .ExitCurrentComposite()
+                    .Selector()
+                        .Execution(() => Status.Success)
+                        .Sequence()
+                            .Condition(() => true)
+                                .Condition(() => true)
+                                    .Execution(() => Status.Success)
+                            .Execution(() => Status.Success)
+                            .ExitCurrentComposite()
+                        .ExitCurrentComposite();
+        }
+    }
+
+
 
     public class BehaviorTree
     {
+        private Root _root;
+        public void Tick()
+        {
+            _root.Invoke();
+        }
+
+        private Stack<Composite> _compositeStack = new Stack<Composite>();
+        private Behavior _current;
+        private Behavior _tmp;
+        public BehaviorTree StartBuild()
+        {
+            _current = _root;
+            return this;
+        }
+
+        public BehaviorTree Sequence()
+        {
+            Sequence sequence = new Sequence();
+            AttachAsChild(_current, sequence);
+            _compositeStack.Push(sequence);
+            _current = sequence;
+            return this;
+        }
+
+        public BehaviorTree Selector()
+        {
+            Selector selector = new Selector();
+            AttachAsChild(_current, selector);
+            _compositeStack.Push(selector);
+            _current = selector;
+            return this;
+        }
+
+        public BehaviorTree Condition(Func<bool> condition)
+        {
+            Condition tmpCondition = new Condition(condition);
+            AttachAsChild(_current, tmpCondition);
+            _current = tmpCondition;
+            return this;
+        }
+
+        public BehaviorTree Execution(Func<Status> execute)
+        {
+            Execution execution = new Execution(execute);
+            AttachAsChild(_current, execution);
+
+            if (_compositeStack.Count > 0)
+                _current = _compositeStack.Peek();
+            else
+                _current = _root;
+
+            return this;
+        }
+
+        private void AttachAsChild(Behavior parent, Behavior child)
+        {
+            if (parent is Composite)
+                (parent as Composite).AddChild(child);
+            else if (parent is IChild)
+                (parent as IChild).SetChild(child);
+            else
+                throw new Exception("[BehaviorTree] : AttachAsChild() - Parent does not have a child");
+        }
+
+        public BehaviorTree ExitCurrentComposite()
+        {
+            if (_compositeStack.Count > 1)
+            {
+                _compositeStack.Pop();
+                _current = _compositeStack.Peek();
+            }
+            else if (_compositeStack.Count == 1)
+            {
+                _compositeStack.Pop();
+                _current = _root;
+            }
+            else
+                throw new Exception("[BehaviorTree] : Cannot exit last composite");
+
+            return this;
+        }
+    }   
+
+    #region Behaviors
+    public interface IChild
+    {
+        public Behavior Child { get; }
+        public void SetChild(Behavior child);
     }
 
     public abstract class Behavior
@@ -21,7 +134,7 @@ namespace BT
         public abstract Status Invoke(out Behavior leaf);
     }
 
-    public class Root : Behavior
+    public class Root : Behavior, IChild
     {
         public Behavior Child { get; private set; }
         public Behavior RunningLeaf { get; private set; }
@@ -55,7 +168,7 @@ namespace BT
         }
     }
 
-    public class Condition : Behavior
+    public class Condition : Behavior, IChild
     {
         public Behavior Child { get; private set; }
         private Func<bool> _condition;
@@ -65,6 +178,10 @@ namespace BT
             _condition = condition;
         }
 
+        public void SetChild(Behavior child)
+        {
+            Child = child;
+        }
         public void SetCondition(Func<bool> condition) => _condition = condition;
 
         public override Status Invoke(out Behavior leaf)
@@ -75,6 +192,7 @@ namespace BT
             else
                 return Status.Failure;
         }
+
     }
 
     public abstract class Composite : Behavior
@@ -214,4 +332,154 @@ namespace BT
             return _execute.Invoke();
         }
     }
+
+    public abstract class Decorator : Behavior, IChild
+    {
+        public Behavior Child { get; private set; }
+
+        public void SetChild(Behavior child)
+        {
+            Child = child;
+        }
+        public override Status Invoke(out Behavior leaf)
+        {
+            return Decorate(Child.Invoke(out leaf), out leaf);
+        }
+
+        public abstract Status Decorate(Status status, out Behavior leaf);        
+    }
+
+    public class RepeatForSeconds : Decorator
+    {
+        private float _time;
+        private float _timeMark;
+        private int _state = 0;
+        private Status _tmpResult;
+        public RepeatForSeconds(float time)
+        {
+            _time = time;
+        }
+
+        public override Status Decorate(Status status, out Behavior leaf)
+        {
+            _tmpResult = Status.Running;
+            leaf = Child;
+            switch (_state)
+            {
+                case 0:
+                    {
+                        Child.Invoke(out leaf);
+                        _timeMark = Time.time;
+                        _state++;
+                    }
+                    break;
+                case 1:
+                    {
+                        Child.Invoke(out leaf);
+                        if (Time.time - _timeMark > _time)
+                            _state++;
+                    }
+                    break;
+                case 2:
+                    {
+                        _tmpResult = Child.Invoke(out leaf);
+                        _state = 0;
+                    }
+                    break;
+                default:
+                    break;
+            }
+            return _tmpResult;
+        }
+    }
+
+    public class RepeatForRandomSeconds : Decorator
+    {
+        private float _timeMin, _timeMax;
+        private float _time;
+        private float _timeMark;
+        private int _state = 0;
+        private Status _tmpResult;
+        public RepeatForRandomSeconds(float timeMin, float timeMax)
+        {
+            _timeMin = timeMin;
+            _timeMax = timeMax;
+        }
+
+        public override Status Decorate(Status status, out Behavior leaf)
+        {
+            _tmpResult = Status.Running;
+            leaf = Child;
+            switch (_state)
+            {
+                case 0:
+                    {
+                        Child.Invoke(out leaf);
+                        _timeMark = Time.time;
+                        _time = UnityEngine.Random.Range(_timeMin, _timeMax);
+                        _state++;
+                    }
+                    break;
+                case 1:
+                    {
+                        Child.Invoke(out leaf);
+                        if (Time.time - _timeMark > _time)
+                            _state++;
+                    }
+                    break;
+                case 2:
+                    {
+                        _tmpResult = Child.Invoke(out leaf);
+                        _state = 0;
+                    }
+                    break;
+                default:
+                    break;
+            }
+            return _tmpResult;
+        }
+    }
+
+    public class Repeat : Decorator
+    {
+        private int _count;
+
+        public Repeat(int count)
+        {
+            _count = count;
+        }
+
+        public override Status Decorate(Status status, out Behavior leaf)
+        {
+            leaf = Child;
+
+            if (status == Status.Failure)
+                return Status.Failure;
+
+            _count--;
+            while (_count > 0)
+            {
+                if (Child.Invoke(out leaf) == Status.Failure)
+                    return Status.Failure;
+
+                _count--;
+            }
+            return Status.Success;
+        }
+    }
+
+    public class Inverter : Decorator
+    {
+        public override Status Decorate(Status status, out Behavior leaf)
+        {
+            leaf = Child;
+            if (status == Status.Failure)
+                return Status.Success;
+            else if (status == Status.Success)
+                return Status.Failure;
+            else
+                return Status.Running;
+        }
+    }
+    #endregion
 }
