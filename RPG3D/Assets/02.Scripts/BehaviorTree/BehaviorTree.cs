@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace BT
@@ -39,7 +41,7 @@ namespace BT
 
     public class BehaviorTree
     {
-        private Root _root;
+        private Root _root = new Root();
         public void Tick()
         {
             _root.Invoke();
@@ -72,6 +74,15 @@ namespace BT
             return this;
         }
 
+        public BehaviorTree RandomSelector()
+        {
+            RandomSelector randomSelector = new RandomSelector();
+            AttachAsChild(_current, randomSelector);
+            _compositeStack.Push(randomSelector);
+            _current = randomSelector;
+            return this;
+        }
+
         public BehaviorTree Condition(Func<bool> condition)
         {
             Condition tmpCondition = new Condition(condition);
@@ -90,6 +101,14 @@ namespace BT
             else
                 _current = _root;
 
+            return this;
+        }
+
+        public BehaviorTree RunAndSleepRandom(float minTime, float maxTime)
+        {
+            RunAndSleepRandom runAndSleepRandom = new RunAndSleepRandom(minTime, maxTime);
+            AttachAsChild(_current, runAndSleepRandom);
+            _current = runAndSleepRandom;
             return this;
         }
 
@@ -249,6 +268,26 @@ namespace BT
         }
     }
 
+    public class RandomSelector : Composite
+    {
+        private Status _tmpResult;
+
+        public override Status Invoke(out Behavior leaf)
+        {
+            leaf = this;
+            foreach (Behavior child in _children.OrderBy(c => UnityEngine.Random.Range(0, _children.Count)))
+            {
+                _tmpResult = child.Invoke(out leaf);
+                if (_tmpResult != Status.Failure)
+                {
+                    leaf = child;
+                    return _tmpResult;
+                }
+            }
+            return Status.Failure;
+        }
+    }
+
     public class Pararell : Composite
     {
         public enum Policy
@@ -347,6 +386,51 @@ namespace BT
         }
 
         public abstract Status Decorate(Status status, out Behavior leaf);        
+    }
+
+    public class RunAndSleepRandom : Decorator
+    {
+        private float _timeMin, _timeMax;
+        private float _time;
+        private float _timeMark;
+        private int _state = 0;
+        private Status _tmpResult;
+
+        public RunAndSleepRandom(float timeMin, float timeMax)
+        {
+            _timeMin = timeMin;
+            _timeMax = timeMax;
+        }
+        public override Status Decorate(Status status, out Behavior leaf)
+        {
+            _tmpResult = Status.Running;
+            leaf = this;
+            switch (_state)
+            {
+                case 0:
+                    {
+                        _timeMark = Time.time;
+                        _time = UnityEngine.Random.Range(_timeMin, _timeMax);
+                        _state++;
+                    }
+                    break;
+                case 1:
+                    {
+                        if (Time.time - _timeMark > _time)
+                            _state++;
+                    }
+                    break;
+                case 2:
+                    {
+                        _tmpResult = Status.Success;
+                        _state = 0;
+                    }
+                    break;
+                default:
+                    break;
+            }
+            return _tmpResult;
+        }
     }
 
     public class RepeatForSeconds : Decorator

@@ -3,14 +3,11 @@
 [RequireComponent(typeof(AnimationManager))]
 public abstract class CharacterBase : MonoBehaviour
 {
-    public float jumpForce;
+    public float jumpForce = 2.0f;
+    public float moveSpeed = 1.0f;
     public int atk = 1;
     protected Rigidbody rb;
     protected AnimationManager animationManager;
-    public LayerMask targetLayer;
-    public GameObject target;
-    public float detectRange;
-    public float detectAttackRange;
 
     public int hp;
 

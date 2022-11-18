@@ -14,6 +14,12 @@ public abstract class StateMachineBase<T> : IStateMachine<T> where T : Enum
     public StateMachineBase(GameObject owner)
     {
         this.owner = owner;
+        states = new Dictionary<T, IState<T>>();
+
+        InitStates();
+
+        current = states[default(T)];
+        currentType = default(T);
     }
 
     public void Tick()
