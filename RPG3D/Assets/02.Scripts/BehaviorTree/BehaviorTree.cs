@@ -401,6 +401,15 @@ namespace BT
             _timeMin = timeMin;
             _timeMax = timeMax;
         }
+
+        public override Status Invoke(out Behavior leaf)
+        {
+            if (_state == 0)
+                return base.Invoke(out leaf);
+            else
+                return Decorate(Status.Running, out leaf);
+        }
+
         public override Status Decorate(Status status, out Behavior leaf)
         {
             _tmpResult = Status.Running;
