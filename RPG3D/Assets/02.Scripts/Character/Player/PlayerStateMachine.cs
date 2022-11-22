@@ -1,4 +1,4 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -19,6 +19,27 @@ public class PlayerStateMachine : StateMachineBase<PlayerState>
 
     protected override void InitStates()
     {
-        throw new System.NotImplementedException();
+        IState<PlayerState> temp;
+
+        // Idle 
+        temp = new PlayerStateIdle(PlayerState.Idle,
+                                   () => true,
+                                   new List<KeyValuePair<Func<bool>, PlayerState>>()
+                                   {
+                                       new KeyValuePair<Func<bool>, PlayerState>
+                                       (
+                                           () => true,
+                                           PlayerState.Move
+                                       )
+                                   },
+                                   owner);
+        states.Add(PlayerState.Idle, temp);
+
+        // Move
+        temp = new PlayerStateMove(PlayerState.Move,
+                                   () => true,
+                                   new List<KeyValuePair<Func<bool>, PlayerState>>(),
+                                   owner);
+        states.Add(PlayerState.Move, temp);
     }
 }

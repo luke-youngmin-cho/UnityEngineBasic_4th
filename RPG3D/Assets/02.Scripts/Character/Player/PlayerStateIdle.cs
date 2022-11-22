@@ -5,10 +5,8 @@ using UnityEngine;
 
 public class PlayerStateIdle : StateBase<PlayerState>
 {
-    private CharacterBase _character;
     public PlayerStateIdle(PlayerState stateType, Func<bool> condition, List<KeyValuePair<Func<bool>, PlayerState>> transitions, GameObject owner) : base(stateType, condition, transitions, owner)
     {
-        owner.GetComponent<CharacterBase>();
     }
 
     public override void Execute()

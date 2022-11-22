@@ -5,10 +5,10 @@ using UnityEngine;
 
 public class PlayerStateMove : StateBase<PlayerState>
 {
-    private CharacterBase _character;
+    private Movement _movement;
     public PlayerStateMove(PlayerState stateType, Func<bool> condition, List<KeyValuePair<Func<bool>, PlayerState>> transitions, GameObject owner) : base(stateType, condition, transitions, owner)
     {
-        owner.GetComponent<CharacterBase>();
+        _movement = owner.GetComponent<Movement>();
     }
 
     public override void Execute()
@@ -26,6 +26,8 @@ public class PlayerStateMove : StateBase<PlayerState>
     public override PlayerState Tick()
     {
         PlayerState next = stateType;
+        animationManager.SetFloat("H", _movement.h);
+        animationManager.SetFloat("V", _movement.v);
         return next;
     }
 }
