@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 [RequireComponent(typeof(AnimationManager))]
-public abstract class CharacterBase : MonoBehaviour
+public abstract class CharacterBase : MonoBehaviour, IStats
 {
     public float jumpForce = 2.0f;
     public float moveSpeed = 1.0f;
@@ -10,6 +10,8 @@ public abstract class CharacterBase : MonoBehaviour
     protected AnimationManager animationManager;
 
     public int hp;
+
+    public Stats stats { get; private set; }
 
     protected IStateMachine machine;
 

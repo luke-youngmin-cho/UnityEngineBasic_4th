@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class Enemy : CharacterBase
+public class Enemy : CharacterBase, IDamage
 {
     // BT
     private BehaviorTree _bt;
@@ -14,6 +14,9 @@ public class Enemy : CharacterBase
     [SerializeField] private float _thinkMinTime = 0.2f;
     [SerializeField] private float _thinkMaxTime = 1.5f;
     [SerializeField] private LayerMask _targetLayer;
+
+    public GameObject Hitter { get; set; }
+    public GameObject Hittee { get; set; }
 
     private void Start()
     {
@@ -91,5 +94,20 @@ public class Enemy : CharacterBase
                             enemyStateMachine.ChangeState(EnemyStates.Move);
                             return enemyStateMachine.currentType == EnemyStates.Move ? Status.Success : Status.Failure;
                         });
+    }
+
+    public void GetDamage(GameObject hitter, GameObject hittee, int damage, bool isCritical)
+    {
+        Hitter = hitter;
+        Hittee = hittee;
+
+        if (hitter.TryGetComponent(out IStats istatsHitter) &&
+            hittee.TryGetComponent(out IStats istatsHittee))
+        {
+            istatsHittee.stats.StatDictionary[Stat.ID_HP].
+                Modify(-istatsHitter.stats.StatDictionary[Stat.ID_ATK].Value, StatModType.Flat);
+        }
+
+        _target = hitter.transform;
     }
 }
