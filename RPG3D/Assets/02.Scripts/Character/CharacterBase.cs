@@ -20,6 +20,7 @@ public abstract class CharacterBase : MonoBehaviour, IStats
         rb = GetComponent<Rigidbody>();
         animationManager = GetComponent<AnimationManager>();
         machine = CreateStateMachine();
+        stats = GetComponent<Stats>();
     }
 
     protected virtual void Update()

@@ -16,9 +16,10 @@ public abstract class StateBase<T> : IState<T> where T : Enum
     protected Func<bool> condition;
     protected List<KeyValuePair<Func<bool>, T>> transitions;
     protected AnimationManager animationManager;
-
+    protected GameObject owner;
     public StateBase(T stateType, Func<bool> condition, List<KeyValuePair<Func<bool>, T>> transitions, GameObject owner)
     {
+        this.owner = owner;
         this.stateType = stateType;
         this.condition = condition;
         this.transitions = transitions;

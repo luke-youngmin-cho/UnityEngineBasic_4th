@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using static UnityEngine.UI.GridLayoutGroup;
 
 public class Enemy : CharacterBase, IDamage
 {
@@ -109,5 +110,11 @@ public class Enemy : CharacterBase, IDamage
         }
 
         _target = hitter.transform;
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireCube(transform.position + transform.forward * .5f, Vector3.one);
     }
 }
