@@ -45,10 +45,31 @@ public class PlayerStateMachine : StateMachineBase<PlayerState>
                                    owner);
         states.Add(PlayerState.Move, temp);
 
+        // Attack
+        temp = new PlayerStateAttack(PlayerState.Attack,
+                                     () => currentType == PlayerState.Idle || currentType == PlayerState.Move,
+                                     new List<KeyValuePair<Func<bool>, PlayerState>>()
+                                     {
+                                         new KeyValuePair<Func<bool>, PlayerState>
+                                         (
+                                             () => true,
+                                             PlayerState.Move
+                                         )
+                                     },
+                                     owner);
+        states.Add(PlayerState.Attack, temp);
+
         // Hurt
         temp = new PlayerStateHurt(PlayerState.Hurt,
                                    () => currentType == PlayerState.Idle || currentType == PlayerState.Move,
-                                   new List<KeyValuePair<Func<bool>, PlayerState>>(),
+                                   new List<KeyValuePair<Func<bool>, PlayerState>>()
+                                   {
+                                       new KeyValuePair<Func<bool>, PlayerState>
+                                       (
+                                           () => true,
+                                           PlayerState.Move
+                                       )
+                                   },
                                    owner);
         states.Add(PlayerState.Hurt, temp);
 
@@ -58,7 +79,10 @@ public class PlayerStateMachine : StateMachineBase<PlayerState>
     IEnumerator E_Init()
     {
         CharacterBase character = owner.GetComponent<CharacterBase>();
+
+        MouseTrigger.OnTriggerActive += () => ChangeState(PlayerState.Attack);
         yield return new WaitUntil(() => character.stats != null);   
         character.stats[Stat.ID_HP].OnValueDecreased += (value) => ChangeState(PlayerState.Hurt);
+        
     }
 }

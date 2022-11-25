@@ -11,16 +11,59 @@ public class PlayerStateHurt : StateBase<PlayerState>
 
     public override void Execute()
     {
-        current = IState<PlayerState>.Commands.OnAction;
+        base.Execute();
         animationManager.SetBool("DoHurt", true);
+    }
+
+    public override void Stop()
+    {
+        base.Stop();
+        animationManager.SetBool("DoHurt", false);
     }
 
     public override PlayerState Tick()
     {
         PlayerState next = stateType;
 
-        if (animationManager.GetNormalizedTime() >= 1.0f)
-            next = PlayerState.Idle;
+        switch (current)
+        {
+            case IState<PlayerState>.Commands.Idle:
+                break;
+            case IState<PlayerState>.Commands.Prepare:
+                {
+                    if (animationManager.GetBool("OnHurt"))
+                    {
+                        current = IState<PlayerState>.Commands.OnAction;
+                    }
+                }
+                break;
+            case IState<PlayerState>.Commands.Casting:
+                break;
+            case IState<PlayerState>.Commands.OnAction:
+                {
+                    if (animationManager.GetNormalizedTime() >= 1.0f)
+                        MoveNext();
+                }
+                break;
+            case IState<PlayerState>.Commands.Finish:
+                {
+                    MoveNext();
+                }
+                break;
+            case IState<PlayerState>.Commands.WaitUntilFinished:
+                {
+                    foreach (var transition in transitions)
+                    {
+                        if (transition.Key.Invoke())
+                        {
+                            next = transition.Value;
+                        }
+                    }
+                }
+                break;
+            default:
+                break;
+        }
 
         return next;
     }

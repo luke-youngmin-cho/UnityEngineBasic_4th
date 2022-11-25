@@ -86,7 +86,7 @@ public class Stat
             }
         }
     }
-    public List<StatModifier> ModifierList;
+    public List<StatModifier> ModifierList = new List<StatModifier>();
     public Action OnValueMax;
     public Action OnValueMin;
     public Action<int> OnValueChanged;
@@ -97,9 +97,9 @@ public class Stat
     public Stat(int id, int value, int min, int max)
     {
         ID = id;
-        Value = value;
         Min = min;
         Max = max;
+        Value = value;
     }
 
     public void AddModifier(StatModifier modifier)
@@ -150,13 +150,13 @@ public class Stat
     {
         if (statModType == StatModType.Flat)
         {
-            ModifiedValue += amount;
+            Value += amount;
         }
         else if (statModType == StatModType.PercentAdd || 
                  statModType == StatModType.PercentMul)
         {
-            ModifiedValue *= 100 + amount;
-            ModifiedValue /= 100;
+            Value *= 100 + amount;
+            Value /= 100;
         }
     }
 }

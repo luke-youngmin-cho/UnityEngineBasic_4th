@@ -64,7 +64,7 @@ public class EnemyStateMachine : StateMachineBase<EnemyStates>
                                                  {
                                                      new KeyValuePair<Func<bool>, EnemyStates>
                                                      (
-                                                       () => animationManager.GetNormalizedTime() >= 1.0f,
+                                                       () => true,
                                                        EnemyStates.Move
                                                      )
                                                  },
@@ -79,7 +79,7 @@ public class EnemyStateMachine : StateMachineBase<EnemyStates>
                                                {
                                                    new KeyValuePair<Func<bool>, EnemyStates>
                                                    (
-                                                     () => animationManager.GetNormalizedTime() >= 1.0f,
+                                                     () => true,
                                                      EnemyStates.Move
                                                    )
                                                },
