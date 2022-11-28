@@ -94,5 +94,16 @@ public class EnemyStateMachine : StateMachineBase<EnemyStates>
                                   owner: owner);
 
         states.Add(EnemyStates.Die, temp);
+
+        owner.GetComponent<CharacterBase>().StartCoroutine(E_Init());
+    }
+
+    IEnumerator E_Init()
+    {
+        CharacterBase character = owner.GetComponent<CharacterBase>();
+
+        yield return new WaitUntil(() => character.stats != null);
+        character.stats[Stat.ID_HP].OnValueDecreased += (value) => ChangeState(EnemyStates.Hurt);
+        character.stats[Stat.ID_HP].OnValueMin += () => ChangeState(EnemyStates.Die);
     }
 }

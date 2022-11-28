@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: RabbitHP
   m_EditorClassIdentifier: 
   ID: 1
-  Value: 100
+  Value: 1000
   Min: 0
-  Max: 100
+  Max: 1000

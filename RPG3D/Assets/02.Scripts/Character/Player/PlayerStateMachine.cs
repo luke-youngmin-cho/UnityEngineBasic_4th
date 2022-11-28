@@ -82,7 +82,6 @@ public class PlayerStateMachine : StateMachineBase<PlayerState>
 
         MouseTrigger.OnTriggerActive += () => ChangeState(PlayerState.Attack);
         yield return new WaitUntil(() => character.stats != null);   
-        character.stats[Stat.ID_HP].OnValueDecreased += (value) => ChangeState(PlayerState.Hurt);
-        
+        character.stats[Stat.ID_HP].OnValueDecreased += (value) => ChangeState(PlayerState.Hurt);        
     }
 }

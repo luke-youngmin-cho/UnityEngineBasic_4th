@@ -41,6 +41,9 @@ public class EnemyStateHurt : StateBase<EnemyStates>
                 {
                     if (animationManager.GetNormalizedTime() >= 1.0f)
                         MoveNext();
+
+                    if (animationManager.GetBool("OnHurt") == false)
+                        current = IState<EnemyStates>.Commands.Error;
                 }
                 break;
             case IState<EnemyStates>.Commands.Finish:
@@ -58,6 +61,15 @@ public class EnemyStateHurt : StateBase<EnemyStates>
                             break;
                         }    
                     }
+
+                    if (animationManager.GetBool("OnHurt") == false)
+                        current = IState<EnemyStates>.Commands.Error;
+                }
+                break;
+            case IState<EnemyStates>.Commands.Error:
+                {
+                    owner.GetComponent<StateMachineBase<EnemyStates>>().Reset();
+                    next = default(EnemyStates);
                 }
                 break;
             default:

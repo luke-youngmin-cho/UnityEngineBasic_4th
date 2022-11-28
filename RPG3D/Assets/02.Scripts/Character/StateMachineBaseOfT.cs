@@ -42,6 +42,14 @@ public abstract class StateMachineBase<T> : IStateMachine<T> where T : Enum
     }
     public void ChangeState(object newStateType) => ChangeState((T)newStateType);
 
+    public void Reset()
+    {
+        current.Stop();
+        current = states[default(T)];
+        current.Execute();
+        currentType = default(T);
+    }
+
     protected abstract void InitStates();
 
 }

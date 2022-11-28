@@ -27,12 +27,21 @@ public class EnemyStateAttack : StateBase<EnemyStates>
     {
         EnemyStates next = stateType;
 
+        if (current > IState<EnemyStates>.Commands.Prepare &&
+            animationManager.GetBool("OnAttack") == false)
+        {
+            current = IState<EnemyStates>.Commands.Error;
+        }
+
         switch (current)
         {
             case IState<EnemyStates>.Commands.Idle:
                 break;
             case IState<EnemyStates>.Commands.Prepare:
-                MoveNext();
+                {
+                    if (animationManager.GetBool("OnAttack"))
+                        MoveNext();
+                }
                 break;
             case IState<EnemyStates>.Commands.Casting:
                 {
@@ -88,6 +97,12 @@ public class EnemyStateAttack : StateBase<EnemyStates>
                 }
                 break;
             case IState<EnemyStates>.Commands.WaitUntilFinished:
+                break;
+            case IState<EnemyStates>.Commands.Error:
+                {
+                    owner.GetComponent<StateMachineBase<EnemyStates>>().Reset();
+                    next = default(EnemyStates);
+                }
                 break;
             default:
                 break;

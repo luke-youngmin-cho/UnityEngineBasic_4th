@@ -10,7 +10,8 @@ public interface IState<T> where T : Enum
         Casting,
         OnAction,
         Finish,
-        WaitUntilFinished
+        WaitUntilFinished,
+        Error
     }
     public Commands current { get; }
     public T stateType { get; }

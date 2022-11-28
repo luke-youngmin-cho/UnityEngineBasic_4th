@@ -5,8 +5,10 @@ using UnityEngine;
 
 public class PlayerStateAttack : StateBase<PlayerState>
 {
+    private Player _player;
     public PlayerStateAttack(PlayerState stateType, Func<bool> condition, List<KeyValuePair<Func<bool>, PlayerState>> transitions, GameObject owner) : base(stateType, condition, transitions, owner)
     {
+        _player = owner.GetComponent<Player>();
     }
 
     public override void Execute()
@@ -36,6 +38,7 @@ public class PlayerStateAttack : StateBase<PlayerState>
                     {
                         MouseTrigger.Triggered = false;
                         animationManager.SetBool("DoCombo", false);
+
                         MoveNext();
                     }
                 }
@@ -43,7 +46,16 @@ public class PlayerStateAttack : StateBase<PlayerState>
             case IState<PlayerState>.Commands.Casting:
                 {
                     if (animationManager.isCastingFinished)
-                    {                        
+                    {
+                        foreach (var target in _player.GetTargetsCasted())
+                        {
+                            if (target.TryGetComponent(out IDamage idamage))
+                            {
+                                idamage.GetDamage(owner, target, _player.stats[Stat.ID_ATK].Value, false);
+                            }
+                        }
+
+
                         MoveNext();
                     }
                 }

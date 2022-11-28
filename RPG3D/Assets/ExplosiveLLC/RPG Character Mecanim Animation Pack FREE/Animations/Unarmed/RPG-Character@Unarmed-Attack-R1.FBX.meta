@@ -411,8 +411,22 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
+      - time: 0.31551677
+        functionName: StartTargetCastRightHand
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       - time: 0.42982322
         functionName: SetCastingFinished
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.5443622
+        functionName: EndTargetCastRightHand
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0

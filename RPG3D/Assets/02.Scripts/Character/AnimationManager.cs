@@ -14,8 +14,10 @@ public class AnimationManager : MonoBehaviour
     private int _monitorOnStateMachineHashMem;
     private int _monitorOffStateMachineHash;
 
-    public bool isPreviousStateHasFinished => _monitorOnStateHashMem == _monitorOffStateHash;
-    public bool isPreviousStateMachineHasFinished => _monitorOnStateMachineHashMem == _monitorOffStateMachineHash;
+    public bool isPreviousStateHasFinished => _monitorOnStateHashMem == 0 ? 
+                                                true : _monitorOnStateHashMem == _monitorOffStateHash;
+    public bool isPreviousStateMachineHasFinished => _monitorOnStateMachineHashMem == 0 ?
+                                                       true : _monitorOnStateMachineHashMem == _monitorOffStateMachineHash;
     public bool isCastingFinished { get; private set; }
     public float speed
     {

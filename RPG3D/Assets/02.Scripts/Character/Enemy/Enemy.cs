@@ -28,6 +28,8 @@ public class Enemy : CharacterBase, IDamage
     {
         _bt.Tick();
         base.Update();
+
+        Debug.Log($"{name}{((IStateMachine<EnemyStates>)machine).currentType}, {((IStateMachine<EnemyStates>)machine).current.current}");
     }
 
     protected override IStateMachine CreateStateMachine()
@@ -107,6 +109,8 @@ public class Enemy : CharacterBase, IDamage
         {
             istatsHittee.stats.StatDictionary[Stat.ID_HP].
                 Modify(-istatsHitter.stats.StatDictionary[Stat.ID_ATK].Value, StatModType.Flat);
+
+            Debug.Log($"{name} damaged {damage}");
         }
 
         _target = hitter.transform;
