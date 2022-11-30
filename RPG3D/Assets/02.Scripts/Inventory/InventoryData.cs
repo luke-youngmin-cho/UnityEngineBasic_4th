@@ -35,6 +35,13 @@ public class InventoryData
     }
     public List<ItemPair> Items = new List<ItemPair>();
 
+    public InventoryData()
+    {
+        Debug.Log($"[InventoryData] : Creating...");
+        Load();
+        Debug.Log($"[InventoryData] : Created!!");
+    }
+
     public static void Save(List<ItemPair> list)
     {
         Data.Items = list;
@@ -45,6 +52,7 @@ public class InventoryData
         string jsonPath = $"{Application.persistentDataPath}/InventoryDatas/InventoryData.json";
         string jsonData = JsonUtility.ToJson(Data);
         File.WriteAllText(jsonPath, jsonData);
+        Debug.Log($"[InventoryData] : Data saved!!");
     }
 
     public static void Load()
@@ -57,7 +65,8 @@ public class InventoryData
         {
             if (File.Exists(jsonPath))
             {
-                 Data = JsonUtility.FromJson<InventoryData>(File.ReadAllText(jsonPath));
+                Data = JsonUtility.FromJson<InventoryData>(File.ReadAllText(jsonPath));
+                Debug.Log($"[InventoryData] : Data loaded!!");
             }
         }
     }

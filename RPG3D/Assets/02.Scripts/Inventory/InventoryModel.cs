@@ -29,8 +29,12 @@ public class InventoryModel : INotifyCollectionChanged<ItemPair>
 
     public InventoryModel()
     {
-        Presenter = new InventoryPresenter();
+        Debug.Log($"[InventoryModel] : Creating...");
+        SetItems(InventoryData.Data.Items);
+        Presenter = new InventoryPresenter(this);
+        Debug.Log($"[InventoryModel] : Created...");
     }
+
 
     public void AddItem(ItemPair itemPair)
     {
@@ -68,5 +72,14 @@ public class InventoryModel : INotifyCollectionChanged<ItemPair>
         }
     }
 
-
+    private void SetItems(List<ItemPair> items)
+    {
+        foreach (ItemPair itemPair in items)
+        {
+            if (Items.ContainsKey(itemPair.Code))
+                Items[itemPair.Code] += itemPair.Num;
+            else
+                Items.Add(itemPair.Code, itemPair.Num);
+        }
+    }
 }

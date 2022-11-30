@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-public class InventotryViewSlot : MonoBehaviour
+public class InventoryViewSlot : MonoBehaviour
 {
     public int ID;
+    public bool IsEmpty => _itemCode == 0;
     private int _itemCode;
     public int ItemCode
     {
@@ -36,8 +37,12 @@ public class InventotryViewSlot : MonoBehaviour
             _num = value;
             if (value > 1)
                 _numText.text = value.ToString();
-            else
+            else if (value == 1)
                 _numText.text = string.Empty;
+            else
+            {
+                ItemCode = 0;
+            }
         }
     }
     [SerializeField] private TMP_Text _numText;
