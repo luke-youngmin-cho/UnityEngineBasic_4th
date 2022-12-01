@@ -11,7 +11,7 @@ public class InventoryModel : INotifyCollectionChanged<ItemPair>
 {
     public InventoryPresenter Presenter;
 
-    public Dictionary<int, int> Items;
+    public Dictionary<int, int> Items = new Dictionary<int, int>();
     public List<ItemPair> ItemList
     {
         get
