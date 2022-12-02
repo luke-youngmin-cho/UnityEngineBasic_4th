@@ -9,7 +9,7 @@ public class Item : MonoBehaviour
     public int Num;
     private bool _isPickingUp;
     private float _moveSpeed = 2.0f;
-    private float _arriveDistance = 0.1f;
+    private float _arriveDistance = 0.5f;
 
     public virtual void PickUp(GameObject picker)
     {

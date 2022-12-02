@@ -32,6 +32,15 @@ public class InventoryView : MonoBehaviour
             slot.ID = i;
             Slots.Add(slot);
         }
+
+        int count = 0;
+        foreach (var item in Presenter.source.Items)
+        {
+            Slots[count].ItemCode = item.Key;
+            Slots[count].Num = item.Value;
+            count++;
+        }
+
         Debug.Log($"[InventoryView] : Initialized!!");
     }
 

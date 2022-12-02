@@ -25,7 +25,9 @@ public class InventoryData
         get
         {
             if (_data == null)
-                _data = new InventoryData();
+            {
+                _data = Load();
+            }
             return _data;
         }
         set
@@ -38,11 +40,11 @@ public class InventoryData
     public InventoryData()
     {
         Debug.Log($"[InventoryData] : Creating...");
-        Load();
+        
         Debug.Log($"[InventoryData] : Created!!");
     }
 
-    public static void Save(List<ItemPair> list)
+    public static InventoryData Save(List<ItemPair> list)
     {
         Data.Items = list;
 
@@ -53,21 +55,52 @@ public class InventoryData
         string jsonData = JsonUtility.ToJson(Data);
         File.WriteAllText(jsonPath, jsonData);
         Debug.Log($"[InventoryData] : Data saved!!");
+        return Data;
     }
 
-    public static void Load()
+    public static InventoryData CreateDefault()
     {
         string jsonPath = $"{Application.persistentDataPath}/InventoryDatas/InventoryData.json";
 
         if (Directory.Exists($"{Application.persistentDataPath}/InventoryDatas") == false)
             Directory.CreateDirectory($"{Application.persistentDataPath}/InventoryDatas");
-        else
+
+        if (File.Exists(jsonPath) == false)
         {
-            if (File.Exists(jsonPath))
+            _data = new InventoryData();
+            _data.Items = new List<ItemPair>();
+            string jsonData = JsonUtility.ToJson(_data);
+            File.WriteAllText(jsonPath, jsonData);
+            Debug.Log($"[InventoryData] : Data created!!");
+            return _data;
+        }
+
+        return null;
+    }
+
+
+
+    public static InventoryData Load()
+    {
+        string jsonPath = $"{Application.persistentDataPath}/InventoryDatas/InventoryData.json";
+
+        try
+        {
+            if (Directory.Exists($"{Application.persistentDataPath}/InventoryDatas") == false ||
+                File.Exists(jsonPath) == false)
             {
-                Data = JsonUtility.FromJson<InventoryData>(File.ReadAllText(jsonPath));
-                Debug.Log($"[InventoryData] : Data loaded!!");
+                return CreateDefault();
             }
+            else
+            {
+                Debug.Log($"[InventoryData] : Data loaded!!");
+                return JsonUtility.FromJson<InventoryData>(File.ReadAllText(jsonPath));
+            }
+        }
+        catch (System.Exception e)
+        {
+            Debug.LogError(e.Message);
+            return null;
         }
     }
 }

@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-public class InventoryViewSlot : MonoBehaviour
+using UnityEngine.EventSystems;
+
+public class InventoryViewSlot : MonoBehaviour, IPointerDownHandler
 {
     public int ID;
     public bool IsEmpty => _itemCode == 0;
@@ -46,4 +48,16 @@ public class InventoryViewSlot : MonoBehaviour
         }
     }
     [SerializeField] private TMP_Text _numText;
+
+    public void OnPointerDown(PointerEventData eventData)
+    {
+        if (IsEmpty)
+            return;
+
+        if (eventData.button == PointerEventData.InputButton.Left)
+        { 
+            if (InventorySlotHandler.instance.isBusy == false)
+                InventorySlotHandler.instance.Handle(this);
+        }
+    }
 }

@@ -8,7 +8,8 @@ public class ItemPicker : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (1<<other.gameObject.layer == _itemLayer)
+        if (Input.GetKey(KeyCode.Z) &&
+            1<<other.gameObject.layer == _itemLayer)
         {
             other.gameObject.GetComponent<Item>().PickUp(gameObject);
         }

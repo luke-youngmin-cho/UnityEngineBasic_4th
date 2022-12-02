@@ -18,5 +18,5 @@ public class ItemData : ScriptableObject
     public string Description;
     public int MaxNum;
     public Sprite Icon;
-    public int Code => HashCode.Combine(ItemType, Name);
+    public int Code;
 }
