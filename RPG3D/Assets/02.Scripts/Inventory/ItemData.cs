@@ -19,4 +19,5 @@ public class ItemData : ScriptableObject
     public int MaxNum;
     public Sprite Icon;
     public int Code;
+
 }

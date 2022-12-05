@@ -1606,6 +1606,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isBusy: 0
   _icon: {fileID: 54233223}
+  _graphicRaycaster: {fileID: 1030769833}
 --- !u!114 &54233223
 MonoBehaviour:
   m_ObjectHideFlags: 0

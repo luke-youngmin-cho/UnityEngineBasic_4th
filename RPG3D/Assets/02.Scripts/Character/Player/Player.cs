@@ -6,6 +6,8 @@ using UnityEngine;
 [RequireComponent(typeof(Movement))]
 public class Player : CharacterBase, IDamage
 {
+    public static Player Instance;
+
     public GameObject Hitter { get; set; }
     public GameObject Hittee { get; set; }
 
@@ -16,6 +18,14 @@ public class Player : CharacterBase, IDamage
     public void EndTargetCastLeftHand() => TargetCasterLeftHand.On = false;
     public void StartTargetCastRightHand() => TargetCasterRightHand.On = true;
     public void EndTargetCastRightHand() => TargetCasterRightHand.On = true;
+
+
+    protected override void Awake()
+    {
+        Instance = this;
+        base.Awake();
+    }
+
     public IEnumerable<GameObject> GetTargetsCasted()
     {
         // Enumerable.Concat<> 

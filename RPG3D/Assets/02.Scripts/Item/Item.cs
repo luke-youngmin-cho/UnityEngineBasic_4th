@@ -23,6 +23,11 @@ public class Item : MonoBehaviour
         Debug.Log("Tried pick up");
     }
 
+    public virtual void Use()
+    {
+
+    }
+
     private IEnumerator E_PickUpEffect(Transform picker, Func<Item, bool> OnFinish)
     {
         while (Vector3.Distance(transform.position, picker.position) > _arriveDistance)

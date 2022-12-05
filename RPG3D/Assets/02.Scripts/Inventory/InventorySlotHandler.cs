@@ -62,7 +62,8 @@ public class InventorySlotHandler : MonoBehaviour, IPointerDownHandler
             // Check event occured on ui
             foreach (var result in results)
             {
-                if (result.gameObject.TryGetComponent(out CanvasRenderer canvasRenderer))
+                if (result.gameObject != this.gameObject &&
+                    result.gameObject.TryGetComponent(out CanvasRenderer canvasRenderer))
                 {
                     onCanvas = true;
                 }
@@ -71,7 +72,10 @@ public class InventorySlotHandler : MonoBehaviour, IPointerDownHandler
             // User is dropping the item on battle field
             if (onCanvas == false)
             {
-                // todo -> drop item.
+                if (InventoryPresenter.instance.dropCMD.TryExecute(new ItemPair(_slot.ItemCode, _slot.Num)))
+                {
+                    Cancel();
+                }
             }
         }
     }

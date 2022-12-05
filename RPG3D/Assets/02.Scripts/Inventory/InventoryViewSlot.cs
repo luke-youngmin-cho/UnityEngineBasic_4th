@@ -20,9 +20,15 @@ public class InventoryViewSlot : MonoBehaviour, IPointerDownHandler
         {
             _itemCode = value;
             if (value != 0)
+            {
                 _icon.sprite = ItemDataAssets.Instance.ItemDataDictionary[value].Icon;
-            else 
+            }
+            else
+            {
                 _icon.sprite = null;
+
+                Num = 0;
+            }
         }
     }
     [SerializeField] private Image _icon;
@@ -43,7 +49,8 @@ public class InventoryViewSlot : MonoBehaviour, IPointerDownHandler
                 _numText.text = string.Empty;
             else
             {
-                ItemCode = 0;
+                if (_itemCode != 0)
+                    ItemCode = 0;
             }
         }
     }

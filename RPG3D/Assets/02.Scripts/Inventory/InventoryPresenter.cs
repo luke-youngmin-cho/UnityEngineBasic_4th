@@ -120,6 +120,47 @@ public class InventoryPresenter
     public RemoveCommand removeCMD;
     #endregion
 
+    #region Drop Command
+    public class DropCommand
+    {
+        private InventoryModel _model;
+
+        public DropCommand(InventoryModel model)
+        {
+            _model = model;
+        }
+
+        public bool CanExecute(ItemPair item)
+        {
+            return _model.Items.ContainsKey(item.Code) &&
+                   _model.Items[item.Code] >= item.Num;
+        }
+
+        public void Execute(ItemPair item)
+        {
+            if (_model.RemoveItem(new ItemPair(item.Code, item.Num)))
+            {
+                GameObject.Instantiate(ItemAssets.Instance.ItemDictionary[item.Code],
+                                       Player.Instance.transform.position + Vector3.up,
+                                       Quaternion.identity)
+                    .Num = item.Num;
+            }
+        }
+
+        public bool TryExecute(ItemPair item)
+        {
+            if (CanExecute(item))
+            {
+                Execute(item);
+                return true;
+            }
+
+            return false;
+        }
+    }
+    public DropCommand dropCMD;
+    #endregion
+
 
     public InventoryPresenter(InventoryModel model)
     {
@@ -129,6 +170,7 @@ public class InventoryPresenter
         source = new Source(model);
         addCMD = new AddCommand(model);
         removeCMD = new RemoveCommand(model);
+        dropCMD = new DropCommand(model);
         Debug.Log($"[InventoryPresenter] : Created...");
     }
 }
